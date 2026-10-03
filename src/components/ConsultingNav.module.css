@@ -1,0 +1,79 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9000;
+  padding: 28px 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: padding .4s var(--expo), background .5s;
+}
+
+.logo {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -.04em;
+  background: linear-gradient(135deg, var(--ink) 0%, var(--olive-light) 30%, var(--acid) 65%, var(--moss) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  background-size: 200% auto;
+  background-position: 0% center;
+  text-decoration: none;
+  display: inline-block;
+  transition: opacity 0.3s, background-position 0.6s ease;
+}
+
+.logo:hover {
+  opacity: 0.9;
+  background-position: 100% center;
+}
+
+.nRight {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.clock {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: .1em;
+}
+
+.navLink {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  position: relative;
+  transition: color .3s;
+}
+/* Underline grows from left on hover */
+.navLink::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 1px;
+  background: var(--acid);
+  transition: width 0.35s cubic-bezier(.16,1,.3,1);
+}
+.navLink:hover {
+  color: var(--acid);
+}
+.navLink:hover::after {
+  width: 100%;
+}
+
+@media (max-width: 1000px) {
+  .nav { padding: 18px 24px; }
+}

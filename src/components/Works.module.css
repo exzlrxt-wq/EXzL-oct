@@ -1,0 +1,193 @@
+/* ══ WORKS — horizontal scroll gallery ══ */
+
+.scrollSection {
+  height: 280vh;           /* balanced — comfortable gallery speed, minimal gap to Statement */
+  position: relative;
+  padding: 0 !important;
+}
+
+.stickyContainer {
+  position: sticky;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg);
+  z-index: 10;
+  will-change: transform;
+}
+
+.stickyContainer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 200px;
+  background: linear-gradient(to bottom, #0b0a09 0%, rgba(11,10,9,0) 100%);
+  z-index: 5;
+  pointer-events: none;
+}
+
+.stickyContainer::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 200px;
+  background: linear-gradient(to top, #0b0a09 0%, rgba(11,10,9,0) 100%);
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Forest BG — flush left */
+.forestBg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: left top;
+  opacity: 0.10;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%);
+}
+
+/* WORK stencil */
+.introStencil {
+  position: absolute;
+  right: -2%;
+  top: 50%;
+  transform: translateY(-52%) translateZ(0);
+  font-size: clamp(180px, 28vw, 420px);
+  font-family: var(--serif);
+  font-weight: 700;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(232,227,216,.05);
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -.04em;
+  line-height: 1;
+  white-space: nowrap;
+  z-index: 2;
+  will-change: transform;
+}
+
+/* Archive label */
+.ambientLabel {
+  position: absolute;
+  left: 7vw;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.introTitle {
+  font-family: var(--serif);
+  font-size: clamp(52px, 8.5vw, 126px);
+  font-weight: 700;
+  line-height: .88;
+  letter-spacing: -.03em;
+  margin: 16px 0 18px -4px;
+  color: var(--ink);
+}
+.introTitle em {
+  font-style: italic;
+  background: var(--gradient-text-olive);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.introHint {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .22em;
+  color: rgba(232,227,216,.35);
+}
+
+/* Panning track */
+.track.vid {
+  position: absolute;
+  top: -7%; left: 0;
+  width: 100%; height: 109%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  filter: saturate(0.3) brightness(0.75);
+  transition: filter 0.7s ease, transform 0.9s cubic-bezier(.16,1,.3,1);
+}
+.floatCard:hover .vid {
+  filter: saturate(1.4) brightness(1.05) hue-rotate(35deg) contrast(1.05);
+  transform: scale(1.06);
+}
+
+/* Green screen overlay on hover */
+.vidGreenOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(108, 209, 134, 0.18);
+  mix-blend-mode: screen;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+  z-index: 2;
+  pointer-events: none;
+}
+.floatCard:hover .vidGreenOverlay {
+  opacity: 1;
+}
+
+.track {
+  position: absolute;
+  top: 0; left: 0;
+  height: 100%;
+  z-index: 1;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Cards */
+.floatCard {
+  position: absolute;
+  cursor: none;
+}
+
+.vidWrap {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.vid {
+  position: absolute;
+  top: -7%; left: 0;
+  width: 100%; height: 109%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.floatLabel {
+  padding-top: 11px;
+}
+
+.labelTop { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+.lNum  { font-family:var(--mono); font-size:9px; color:var(--acid); letter-spacing:.14em; }
+.lTag  { font-family:var(--mono); font-size:8px; text-transform:uppercase; letter-spacing:.16em; color:rgba(232,227,216,.5); border:1px solid rgba(232,227,216,.12); padding:2px 8px; border-radius:2px; }
+.lTitle{ font-family:var(--serif); font-size:clamp(15px,1.8vw,28px); font-weight:700; line-height:1.0; letter-spacing:-.018em; color:var(--ink); margin:0 0 4px; }
+.lMeta { font-family:var(--mono); font-size:8px; text-transform:uppercase; letter-spacing:.14em; color:rgba(232,227,216,.35); }
+
+/* Mobile */
+@media (max-width: 900px) {
+  .scrollSection { height: auto; }
+  .stickyContainer { position: relative; height: auto; overflow: visible; }
+  .track { display:flex !important; flex-direction:column; position:relative !important; width:100% !important; transform:none !important; height:auto; gap:14vw; padding:60px 6vw 80px; }
+  .ambientLabel { position:relative; left:auto; top:auto; transform:none; padding:60px 6vw 0; }
+  .floatCard { position:relative !important; left:auto !important; top:auto !important; width:100% !important; }
+  .introStencil { display:none; }
+}

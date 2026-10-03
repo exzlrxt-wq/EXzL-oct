@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 600" fill="none" stroke="#E8E3D8" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Left cane -->
+  <path d="M80 590 L75 10" stroke-width="2.2"/>
+  <!-- Left cane nodes -->
+  <path d="M78 520 C60 518 55 512 60 508 C65 504 90 504 95 508 C100 512 96 518 78 520Z" stroke-width="1" fill="none"/>
+  <path d="M77 430 C59 428 54 422 59 418 C64 414 89 414 94 418 C99 422 95 428 77 430Z" stroke-width="1"/>
+  <path d="M76 340 C58 338 53 332 58 328 C63 324 88 324 93 328 C98 332 94 338 76 340Z" stroke-width="1"/>
+  <path d="M75 250 C57 248 52 242 57 238 C62 234 87 234 92 238 C97 242 93 248 75 250Z" stroke-width="1"/>
+  <path d="M74 160 C56 158 51 152 56 148 C61 144 86 144 91 148 C96 152 92 158 74 160Z" stroke-width="1"/>
+  <path d="M73 80 C55 78 50 72 55 68 C60 64 85 64 90 68 C95 72 91 78 73 80Z" stroke-width="1"/>
+  <!-- Left cane leaves -->
+  <path d="M78 200 C60 180 20 165 5 145" stroke-width="1.2"/>
+  <path d="M77 310 C95 290 135 272 155 255" stroke-width="1.2"/>
+  <!-- Center cane (tallest) -->
+  <path d="M155 595 L150 5" stroke-width="2.5"/>
+  <path d="M153 510 C135 508 130 502 135 498 C140 494 165 494 170 498 C175 502 171 508 153 510Z" stroke-width="1"/>
+  <path d="M152 400 C134 398 129 392 134 388 C139 384 164 384 169 388 C174 392 170 398 152 400Z" stroke-width="1"/>
+  <path d="M151 295 C133 293 128 287 133 283 C138 279 163 279 168 283 C173 287 169 293 151 295Z" stroke-width="1"/>
+  <path d="M150 190 C132 188 127 182 132 178 C137 174 162 174 167 178 C172 182 168 188 150 190Z" stroke-width="1"/>
+  <path d="M149 95 C131 93 126 87 131 83 C136 79 161 79 166 83 C171 87 167 93 149 95Z" stroke-width="1"/>
+  <!-- Center leaves -->
+  <path d="M152 150 C130 128 88 112 65 98" stroke-width="1.2"/>
+  <path d="M153 260 C175 238 218 220 242 205" stroke-width="1.2"/>
+  <!-- Right cane -->
+  <path d="M228 592 L224 18" stroke-width="2"/>
+  <path d="M226 530 C208 528 203 522 208 518 C213 514 238 514 243 518 C248 522 244 528 226 530Z" stroke-width="1"/>
+  <path d="M225 440 C207 438 202 432 207 428 C212 424 237 424 242 428 C247 432 243 438 225 440Z" stroke-width="1"/>
+  <path d="M224 355 C206 353 201 347 206 343 C211 339 236 339 241 343 C246 347 242 353 224 355Z" stroke-width="1"/>
+  <path d="M223 268 C205 266 200 260 205 256 C210 252 235 252 240 256 C245 260 241 266 223 268Z" stroke-width="1"/>
+  <path d="M222 180 C204 178 199 172 204 168 C209 164 234 164 239 168 C244 172 240 178 222 180Z" stroke-width="1"/>
+  <!-- Right cane leaves -->
+  <path d="M226 490 C245 470 285 452 300 438" stroke-width="1.2"/>
+  <path d="M225 380 C205 360 165 344 145 330" stroke-width="1.2"/>
+</svg>

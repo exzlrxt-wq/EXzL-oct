@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 500" fill="none" stroke="#E8E3D8" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Leaf 1: Large oval leaf, slightly tilted -->
+  <ellipse cx="100" cy="80" rx="42" ry="25" transform="rotate(-20 100 80)" stroke-width="1.3"/>
+  <path d="M72 92 C85 80 115 68 128 68" transform="rotate(-20 100 80)" stroke-width="0.7"/>
+  <path d="M80 88 C87 80 112 72 120 72" transform="rotate(-20 100 80)" stroke-width="0.5"/>
+  <!-- Leaf 1 stem -->
+  <path d="M85 96 C80 108 78 118 76 128" stroke-width="1"/>
+  <!-- Leaf 2: Pointed leaf, upper right -->
+  <path d="M340 40 C355 28 385 22 405 30 C420 36 422 50 408 58 C394 66 362 62 340 40Z" stroke-width="1.3"/>
+  <path d="M340 40 C360 42 390 46 408 58" stroke-width="0.7"/>
+  <!-- Leaf 2 stem -->
+  <path d="M340 40 C332 52 325 62 320 72" stroke-width="1"/>
+  <!-- Leaf 3: Round monstera-like, mid-left -->
+  <path d="M165 220 C158 195 168 168 185 158 C202 148 222 155 230 175 C238 195 228 222 210 232 C192 242 172 245 165 220Z" stroke-width="1.3"/>
+  <path d="M185 158 C188 178 190 200 192 220" stroke-width="0.8"/>
+  <path d="M175 200 C182 198 198 198 208 200" stroke-width="0.6"/>
+  <!-- Small hole -->
+  <ellipse cx="200" cy="185" rx="8" ry="5" stroke-width="0.8"/>
+  <!-- Leaf 3 stem -->
+  <path d="M187 232 C190 248 194 260 198 272" stroke-width="1"/>
+  <!-- Leaf 4: Long narrow leaf, diagonal -->
+  <path d="M430 150 C452 132 495 125 515 140 C528 150 525 168 510 175 C495 182 458 178 430 150Z" stroke-width="1.3"/>
+  <path d="M430 150 C458 152 490 158 515 168" stroke-width="0.7"/>
+  <path d="M435 155 C458 157 490 162 512 172" stroke-width="0.5"/>
+  <!-- Leaf 4 stem -->
+  <path d="M430 155 C420 168 415 180 412 192" stroke-width="1"/>
+  <!-- Leaf 5: Heart-shaped leaf -->
+  <path d="M280 310 C268 295 262 278 272 265 C278 258 290 258 295 265 C300 258 312 258 318 265 C328 278 322 295 310 310 C302 320 288 325 280 310Z" stroke-width="1.3"/>
+  <path d="M295 265 C293 280 290 298 288 314" stroke-width="0.8"/>
+  <!-- Leaf 5 stem -->
+  <path d="M288 318 C286 332 285 345 285 358" stroke-width="1"/>
+  <!-- Leaf 6: Fern-like small leaf, bottom left -->
+  <path d="M80 380 C72 365 68 348 75 335 C80 326 92 325 98 334 C104 343 102 362 95 378 C90 390 82 392 80 380Z" stroke-width="1.2"/>
+  <path d="M75 358 C80 356 92 354 96 356" stroke-width="0.6"/>
+  <path d="M74 370 C78 368 89 367 93 369" stroke-width="0.6"/>
+  <!-- Leaf 6 stem -->
+  <path d="M82 382 C85 395 88 408 90 420" stroke-width="1"/>
+  <!-- Leaf 7: Wide tropical, bottom right -->
+  <path d="M480 400 C472 378 478 354 495 342 C512 330 532 336 540 355 C548 374 540 400 522 412 C504 424 486 422 480 400Z" stroke-width="1.3"/>
+  <path d="M495 342 C500 362 505 382 506 402" stroke-width="0.8"/>
+  <path d="M482 388 C492 384 512 384 522 388" stroke-width="0.6"/>
+  <path d="M484 402 C494 398 514 398 522 404" stroke-width="0.5"/>
+  <!-- Leaf 7 stem -->
+  <path d="M502 414 C498 428 495 442 493 456" stroke-width="1"/>
+  <!-- Small floating leaves/seeds -->
+  <path d="M510 55 C515 48 525 46 528 52 C531 58 524 64 516 60Z" stroke-width="1"/>
+  <path d="M35 310 C38 303 48 302 50 308 C52 314 45 320 38 316Z" stroke-width="1"/>
+  <path d="M570 280 C573 273 582 272 584 278 C586 284 580 290 572 286Z" stroke-width="1"/>
+</svg>

@@ -1,0 +1,100 @@
+.section {
+  background: var(--bg);
+  padding: 160px 8vw;
+  position: relative;
+  overflow: hidden;
+}
+
+.stencil {
+  font-size: clamp(120px, 20vw, 300px);
+  top: 40px;
+  left: -20px;
+}
+
+.pill {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: .28em;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 10px 20px;
+  margin-bottom: 80px;
+  border-radius: 40px;
+}
+
+.quote {
+  font-family: var(--serif);
+  font-size: clamp(48px, 7.5vw, 120px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -.025em;
+  max-width: 18ch;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 .3em;
+  row-gap: .1em;
+}
+
+.wordWrap {
+  display: inline-block;
+  overflow: visible;
+}
+
+.word {
+  display: inline-block;
+  color: var(--ink);
+  will-change: opacity, transform;
+}
+
+.wordHi {
+  color: var(--acid);
+  font-style: italic;
+}
+
+.sig {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .2em;
+  color: var(--muted);
+  margin-top: 80px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  will-change: opacity;
+}
+
+@media (max-width: 768px) {
+  .quote { font-size: clamp(36px, 9vw, 64px); }
+  .section { padding: 100px 6vw; }
+}
+
+/* Botanical layers */
+.botBamboo {
+  position: absolute;
+  top: -10%;
+  right: -5%;
+  height: 120%;
+  width: auto;
+  opacity: 0.05;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(0.6px);
+  transform: rotate(5deg);
+}
+
+.botBanana {
+  position: absolute;
+  bottom: -15%;
+  left: -10%;
+  width: clamp(300px, 45vw, 700px);
+  height: auto;
+  opacity: 0.06;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(0.4px);
+  transform: rotate(-15deg);
+}

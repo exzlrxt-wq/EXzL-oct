@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600" fill="none" stroke="#E8E3D8" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Midrib -->
+  <path d="M200 580 C195 480 180 360 140 200 C120 130 100 70 90 20" stroke-width="2.5"/>
+  <!-- Leaf right side veins -->
+  <path d="M140 200 C180 195 240 200 300 210" stroke-width="1"/>
+  <path d="M148 240 C190 232 250 235 310 248" stroke-width="1"/>
+  <path d="M155 280 C198 270 258 272 318 288" stroke-width="1"/>
+  <path d="M160 320 C205 308 265 310 322 328" stroke-width="1"/>
+  <path d="M163 360 C208 347 268 350 320 370" stroke-width="1"/>
+  <path d="M162 400 C208 386 265 390 315 412" stroke-width="1"/>
+  <path d="M158 440 C200 426 255 430 302 455" stroke-width="1"/>
+  <path d="M152 480 C190 468 240 473 282 498" stroke-width="1"/>
+  <!-- Leaf left side veins -->
+  <path d="M140 200 C100 195 50 198 20 212" stroke-width="1"/>
+  <path d="M148 240 C108 234 58 238 28 254" stroke-width="1"/>
+  <path d="M155 280 C115 272 65 276 35 295" stroke-width="1"/>
+  <path d="M160 320 C120 310 70 316 42 336" stroke-width="1"/>
+  <path d="M163 360 C123 350 74 356 46 378" stroke-width="1"/>
+  <path d="M162 400 C122 390 75 397 49 420" stroke-width="1"/>
+  <path d="M158 440 C120 430 76 437 52 462" stroke-width="1"/>
+  <path d="M152 480 C116 472 78 478 56 502" stroke-width="1"/>
+  <!-- Outer leaf edge right -->
+  <path d="M90 20 C130 60 200 120 300 210 C340 238 350 290 330 380 C318 428 290 470 260 510 C240 536 220 558 200 580" stroke-width="1.5"/>
+  <!-- Outer leaf edge left -->
+  <path d="M90 20 C60 55 30 115 20 200 C12 250 18 310 35 370 C50 420 80 468 115 510 C145 546 170 565 200 580" stroke-width="1.5"/>
+  <!-- Tears/splits in the leaf -->
+  <path d="M260 340 C255 330 262 320 270 325" stroke-width="0.8"/>
+  <path d="M80 420 C85 410 78 400 72 406" stroke-width="0.8"/>
+</svg>

@@ -1,0 +1,171 @@
+/* ── Tools Marquee Section ── */
+
+.section {
+  margin-bottom: 100px;
+  overflow: hidden;
+}
+
+.header {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 32px;
+  margin-bottom: 48px;
+}
+
+.eyebrow {
+  font-family: var(--mono, monospace);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: #00C896;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.eyebrow::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: #00C896;
+  opacity: 0.4;
+}
+
+.intro {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #7E7D79;
+  margin: 0;
+  max-width: 560px;
+}
+
+/* ── Marquee Track ── */
+.track {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 8px 0;
+  /* Pause on hover of the whole strip */
+}
+.track:hover .reel {
+  animation-play-state: paused;
+}
+
+/* Gradient masks — left & right fade */
+.fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 120px;
+  z-index: 2;
+  pointer-events: none;
+}
+.fade[data-side="left"] {
+  left: 0;
+  background: linear-gradient(to right, #0a0a0a 0%, transparent 100%);
+}
+.fade[data-side="right"] {
+  right: 0;
+  background: linear-gradient(to left, #0a0a0a 0%, transparent 100%);
+}
+
+/* ── Scrolling reel ── */
+.reel {
+  display: flex;
+  gap: 0;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+  will-change: transform;
+}
+
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); } /* -50% since list is doubled */
+}
+
+/* ── Individual logo chip ── */
+.chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 28px;
+  cursor: default;
+  position: relative;
+  transition: background 0.3s ease;
+  border-right: 1px solid #1a1a1a;
+  min-width: 100px;
+}
+.chip:hover {
+  background: rgba(0, 200, 150, 0.04);
+}
+.chip:hover .icon {
+  filter: brightness(0) invert(1) sepia(1) saturate(3) hue-rotate(100deg) brightness(1.2);
+  /* Glows acid green on hover */
+  transform: translateY(-3px);
+}
+.chip:hover .fallback {
+  color: #00C896;
+  transform: translateY(-3px);
+}
+.chip:hover .chipLabel {
+  color: #e8e3d8;
+}
+
+/* Icon image */
+.iconWrap {
+  width: 28px;
+  height: 28px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  filter: brightness(0.45);
+  transition: filter 0.35s ease, transform 0.35s cubic-bezier(.16,1,.3,1);
+}
+
+/* Text fallback when CDN icon missing */
+.fallback {
+  display: none; /* shown via JS onError */
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  font-family: var(--mono, monospace);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #3E3D3A;
+  border: 1px solid #282828;
+  transition: color 0.3s, transform 0.35s cubic-bezier(.16,1,.3,1);
+}
+
+/* Tool name label */
+.chipLabel {
+  font-family: var(--mono, monospace);
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #3E3D3A;
+  white-space: nowrap;
+  transition: color 0.3s;
+}
+
+/* Note below strip */
+.note {
+  max-width: 1000px;
+  margin: 28px auto 0;
+  padding: 0 32px;
+  font-family: var(--mono, monospace);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #282828;
+}

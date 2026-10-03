@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 400" fill="none" stroke="#E8E3D8" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Main trunk -->
+  <path d="M250 395 C248 370 244 340 238 310" stroke-width="2.5"/>
+  <!-- Primary roots spreading left and right -->
+  <path d="M238 310 C210 295 165 278 120 265 C90 256 55 255 30 268" stroke-width="1.8"/>
+  <path d="M238 310 C265 292 310 272 358 262 C388 255 420 256 450 270" stroke-width="1.8"/>
+  <!-- Left branch -->
+  <path d="M165 278 C155 258 145 235 130 218 C118 205 102 198 88 204" stroke-width="1.3"/>
+  <path d="M120 265 C112 248 108 228 105 210 C103 196 108 184 118 180" stroke-width="1.3"/>
+  <!-- Left sub-branches -->
+  <path d="M130 218 C118 205 105 195 92 192" stroke-width="0.9"/>
+  <path d="M145 235 C138 220 128 210 115 205" stroke-width="0.9"/>
+  <path d="M88 204 C75 196 62 192 50 196" stroke-width="0.8"/>
+  <path d="M118 180 C108 168 95 162 80 165" stroke-width="0.8"/>
+  <!-- Left fine roots -->
+  <path d="M92 192 C82 182 70 178 58 182" stroke-width="0.6"/>
+  <path d="M50 196 C38 188 28 186 18 190" stroke-width="0.6"/>
+  <path d="M80 165 C68 158 55 155 42 160" stroke-width="0.6"/>
+  <!-- Center-left branch -->
+  <path d="M200 288 C192 268 182 245 170 228 C160 215 148 208 138 212" stroke-width="1.2"/>
+  <path d="M170 228 C162 215 155 202 150 188" stroke-width="0.9"/>
+  <path d="M138 212 C128 202 118 198 108 202" stroke-width="0.8"/>
+  <!-- Right branch -->
+  <path d="M310 272 C320 252 330 229 345 212 C358 198 374 192 388 198" stroke-width="1.3"/>
+  <path d="M358 262 C366 245 370 225 367 208 C365 194 358 182 348 178" stroke-width="1.3"/>
+  <!-- Right sub-branches -->
+  <path d="M345 212 C358 200 372 192 386 195" stroke-width="0.9"/>
+  <path d="M330 229 C342 216 355 208 368 210" stroke-width="0.9"/>
+  <path d="M388 198 C400 190 412 186 422 190" stroke-width="0.8"/>
+  <path d="M348 178 C358 166 372 162 385 166" stroke-width="0.8"/>
+  <!-- Right fine roots -->
+  <path d="M386 195 C396 185 408 182 420 186" stroke-width="0.6"/>
+  <path d="M422 190 C432 182 442 180 452 184" stroke-width="0.6"/>
+  <path d="M385 166 C395 158 408 155 420 160" stroke-width="0.6"/>
+  <!-- Center-right branch -->
+  <path d="M298 278 C306 258 318 235 330 218 C342 204 356 198 368 202" stroke-width="1.2"/>
+  <path d="M330 218 C338 205 344 192 342 178" stroke-width="0.9"/>
+  <!-- Ground line suggestion -->
+  <path d="M10 395 C80 388 160 385 250 385 C340 385 420 388 490 395" stroke-width="0.5" opacity="0.4"/>
+</svg>

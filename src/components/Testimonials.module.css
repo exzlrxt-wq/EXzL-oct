@@ -1,0 +1,80 @@
+.section {
+  padding: 100px 56px;
+  position: relative;
+}
+
+.header {
+  margin-bottom: 56px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; }
+  .section { padding: 80px 24px; }
+}
+
+.card {
+  background: var(--bg);
+  padding: 40px 36px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  transition: background 0.3s ease;
+}
+
+.card:hover {
+  background: rgba(255,255,255,0.015);
+}
+
+.mark {
+  font-family: var(--serif);
+  font-size: 64px;
+  line-height: 0.5;
+  color: var(--acid);
+  opacity: 0.3;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.quote {
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.75;
+  color: rgba(232, 227, 216, 0.75);
+  flex: 1;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+.who {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.name {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 0.01em;
+}
+
+.role {
+  font-family: var(--mono);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+}

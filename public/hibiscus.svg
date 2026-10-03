@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" fill="none" stroke="#E8E3D8" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Hibiscus: 5 petals radiating from center -->
+  <!-- Petal 1 (top) -->
+  <path d="M250 250 C240 220 220 160 230 100 C235 70 255 55 260 80 C265 105 258 170 250 250Z" stroke-width="1.5"/>
+  <path d="M250 250 C260 220 278 162 268 102 C263 72 243 57 238 82 C233 107 242 170 250 250Z" stroke-width="1"/>
+  <!-- Petal 2 (top right) -->
+  <path d="M250 250 C275 232 330 205 385 200 C415 198 435 212 420 225 C405 238 345 235 250 250Z" stroke-width="1.5"/>
+  <path d="M250 250 C272 242 328 232 380 240 C410 245 428 232 415 218 C402 204 342 218 250 250Z" stroke-width="1"/>
+  <!-- Petal 3 (bottom right) -->
+  <path d="M250 250 C268 272 308 330 300 390 C296 420 278 432 266 415 C254 398 258 332 250 250Z" stroke-width="1.5"/>
+  <path d="M250 250 C278 265 322 318 318 378 C316 408 300 422 286 406 C272 390 270 328 250 250Z" stroke-width="1"/>
+  <!-- Petal 4 (bottom left) -->
+  <path d="M250 250 C232 272 192 330 200 390 C204 420 222 432 234 415 C246 398 242 332 250 250Z" stroke-width="1.5"/>
+  <path d="M250 250 C222 265 178 318 182 378 C184 408 200 422 214 406 C228 390 230 328 250 250Z" stroke-width="1"/>
+  <!-- Petal 5 (top left) -->
+  <path d="M250 250 C225 232 170 205 115 200 C85 198 65 212 80 225 C95 238 155 235 250 250Z" stroke-width="1.5"/>
+  <path d="M250 250 C228 242 172 232 120 240 C90 245 72 232 85 218 C98 204 158 218 250 250Z" stroke-width="1"/>
+  <!-- Petal veins - subtle -->
+  <path d="M250 250 C248 220 245 175 248 120" stroke-width="0.6" opacity="0.6"/>
+  <path d="M250 250 C272 238 315 218 360 210" stroke-width="0.6" opacity="0.6"/>
+  <path d="M250 250 C262 268 285 305 292 355" stroke-width="0.6" opacity="0.6"/>
+  <path d="M250 250 C238 268 215 305 208 355" stroke-width="0.6" opacity="0.6"/>
+  <path d="M250 250 C228 238 185 218 140 210" stroke-width="0.6" opacity="0.6"/>
+  <!-- Stamen column -->
+  <path d="M250 250 L250 180" stroke-width="2"/>
+  <!-- Stamen anthers -->
+  <circle cx="250" cy="175" r="4" stroke-width="1.2"/>
+  <circle cx="238" cy="185" r="3" stroke-width="1"/>
+  <circle cx="262" cy="185" r="3" stroke-width="1"/>
+  <circle cx="233" cy="198" r="2.5" stroke-width="1"/>
+  <circle cx="267" cy="198" r="2.5" stroke-width="1"/>
+  <!-- Center -->
+  <circle cx="250" cy="250" r="18" stroke-width="1.5"/>
+  <circle cx="250" cy="250" r="8" stroke-width="1"/>
+</svg>

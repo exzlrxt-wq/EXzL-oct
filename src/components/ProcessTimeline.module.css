@@ -1,0 +1,151 @@
+.section {
+  background: var(--bg);
+  padding: 140px 8vw;
+  margin-top: -4px;              /* overlap Statement by 4px — kills the dark seam line */
+  position: relative;
+  overflow: hidden;
+  content-visibility: auto;     /* browser skips paint/layout while off-screen — free perf win */
+}
+
+/* Botanical accents */
+.botPalm {
+  position: absolute;
+  bottom: -10%;
+  right: -6%;
+  width: clamp(220px, 32vw, 480px);
+  height: auto;
+  opacity: 0.07;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 0;
+  transform: rotate(10deg) scaleX(-1) translateZ(0);
+  filter: blur(0.5px);
+}
+
+
+
+/* ── Book-match PNG — normal orientation, dense canopy AT the seam (CSS top) ── */
+.forestTopMask {
+  position: absolute;
+  top: -4px;                         /* bridge the margin-top overlap */
+  left: 0;
+  width: 100%;
+  height: clamp(400px, 60vh, 800px);
+  object-fit: cover;
+  object-position: center top;
+  opacity: 0.14;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 50;
+  /* Fade out smoothly before hitting the 5-step grid */
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 30%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 0%, black 30%, transparent 100%);
+}
+
+
+.stencil {
+  font-size: clamp(90px, 15vw, 220px);
+  top: 40px;
+  right: -20px;
+  left: auto;
+  -webkit-text-stroke: 1px rgba(232, 227, 216, .07);
+}
+
+.header {
+  margin-bottom: 80px;
+  position: relative;
+  z-index: 1;
+}
+
+.title {
+  font-family: var(--serif);
+  font-size: clamp(44px, 6vw, 90px);
+  font-weight: 700;
+  line-height: .93;
+  letter-spacing: -.025em;
+  margin-top: 12px;
+}
+.title em { font-style: italic; color: var(--acid); }
+
+/* Five-column grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+  position: relative;
+  z-index: 1;
+  margin-top: 40px;
+}
+
+.step {
+  padding: 20px 16px 20px 0;
+  border-left: 1px solid var(--border);
+  padding-left: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  will-change: opacity, transform;
+}
+
+/* First step — no left border, flush left */
+.step:first-child {
+  border-left: none;
+  padding-left: 0;
+}
+
+.stepHead {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stepNum {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--acid);
+  letter-spacing: .15em;
+}
+
+.stepLabel {
+  font-family: var(--serif);
+  font-size: clamp(28px, 2.8vw, 44px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -.015em;
+}
+
+/* Acid underline that animates in */
+.lineTrack {
+  height: 1px;
+  background: var(--border);
+  width: 100%;
+  overflow: hidden;
+}
+
+.lineFill {
+  height: 100%;
+  background: var(--acid);
+  width: 0%;
+  will-change: width;
+}
+
+.stepDesc {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--ink2);
+  max-width: 26ch;
+}
+
+@media (max-width: 1100px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 700px) {
+  .grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 480px) {
+  .grid { grid-template-columns: 1fr; }
+  .step { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 32px; }
+  .step:first-child { border-top: none; }
+}

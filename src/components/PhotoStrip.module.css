@@ -1,0 +1,70 @@
+.strip {
+  overflow: hidden;
+  background: var(--bg2);
+}
+
+.wrap {
+  display: flex;
+  height: 480px;
+}
+
+.ph {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  border-right: 1px solid rgba(0, 0, 0, .5);
+  cursor: none;
+}
+
+.ph:last-child {
+  border-right: none;
+}
+
+.phImg {
+  width: 100%;
+  height: 130%;
+  display: block;
+  object-fit: cover;
+  filter: grayscale(50%) brightness(.7);
+  transition: filter .6s;
+  will-change: transform;
+}
+
+.ph:hover .phImg {
+  filter: grayscale(0%) brightness(.95);
+}
+
+.lbl {
+  position: absolute;
+  bottom: 16px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 7px;
+  text-transform: uppercase;
+  letter-spacing: .22em;
+  color: rgba(237, 232, 223, .35);
+  transition: color .3s;
+}
+
+.ph:hover .lbl {
+  color: var(--acid);
+}
+
+.num {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-family: var(--mono);
+  font-size: 7px;
+  color: rgba(237, 232, 223, .2);
+}
+
+@media (max-width: 1000px) {
+  .wrap { height: 280px; }
+}
+
+@media (max-width: 600px) {
+  .wrap { height: 200px; }
+}

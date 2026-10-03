@@ -1,0 +1,314 @@
+.section {
+  padding: 100px 5vw;
+  background: var(--bg);
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
+  gap: 80px;
+  align-items: flex-start;
+}
+
+.rowLabel {
+  flex: 0 0 160px;
+  font-family: var(--serif);
+  font-size: 32px;
+  line-height: 1.1;
+  font-style: italic;
+  color: var(--acid);
+  position: sticky;
+  top: 140px;
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Flagship Project */
+.flagship {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 32px;
+  background: rgba(255, 255, 255, 0.02);
+  transition: border-color 0.3s ease;
+}
+.flagship:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.flagshipTop {
+  height: 2px;
+  background: var(--acid);
+}
+
+.flagshipBody {
+  padding: 40px;
+}
+
+.flagshipName {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+
+.flagshipSub {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--acid);
+  margin-bottom: 20px;
+  letter-spacing: 0.05em;
+}
+
+.flagshipDesc {
+  font-size: 15px;
+  color: var(--ink2);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.flagshipTech {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  margin-bottom: 24px;
+  text-transform: uppercase;
+}
+
+.flagshipInsight {
+  background: rgba(224, 251, 252, 0.03);
+  border: 1px solid rgba(224, 251, 252, 0.1);
+  border-left: 2px solid var(--acid);
+  padding: 16px 20px;
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.6;
+}
+
+/* Pair Grid (Supporting Apps) */
+.proofPair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.proofCard {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  padding: 32px;
+  background: rgba(255, 255, 255, 0.015);
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.3s ease;
+}
+.proofCard:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.proofCardCat {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.proofCardName {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+
+.proofCardDesc {
+  font-size: 14px;
+  color: var(--ink2);
+  line-height: 1.65;
+  flex: 1;
+}
+
+/* Media Slots & Videos */
+.mediaWrap {
+  margin-top: 24px;
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--bg);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.vid {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.proofCard:hover .vid,
+.flagship:hover .vid {
+  opacity: 1;
+}
+
+.placeholder {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  position: absolute;
+}
+
+.nameBox {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+}
+
+/* Compact name tile grid for no-video projects */
+.nameTileGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.nameTile {
+  padding: 20px 18px;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.015);
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.nameTile:hover {
+  border-color: rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.03);
+}
+
+.nameTileCat {
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.nameTileName {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-1);
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+
+.nameTileDesc {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-2);
+}
+
+@media (max-width: 768px) {
+  .nameTileGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .nameTileGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Other Builds List */
+.otherBuildsTitle {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 24px;
+}
+
+.buildList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.buildTag {
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 6px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  color: var(--ink2);
+  background: rgba(255, 255, 255, 0.02);
+  transition: all 0.3s ease;
+}
+.buildTag:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--ink);
+}
+
+.buildNote {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-top: 12px;
+}
+
+@media (max-width: 900px) {
+  .row {
+    flex-direction: column;
+    gap: 32px;
+  }
+  .rowLabel {
+    flex: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .proofPair {
+    grid-template-columns: 1fr;
+  }
+  .flagshipBody {
+    padding: 24px;
+  }
+}

@@ -1,0 +1,37 @@
+.wrap {
+  padding: 16px 0;
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg2);
+  position: relative;
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  animation: mqs 32s linear infinite;
+}
+
+.wrap:hover .track {
+  animation-play-state: paused;
+}
+
+.item {
+  font-family: var(--mono);
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: .28em;
+  color: var(--muted);
+  padding: 0 36px;
+  white-space: nowrap;
+}
+
+.accent {
+  color: var(--acid);
+}
+
+@keyframes mqs {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
