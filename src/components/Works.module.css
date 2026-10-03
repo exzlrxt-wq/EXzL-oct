@@ -184,10 +184,12 @@
 
 /* Mobile */
 @media (max-width: 900px) {
-  .scrollSection { height: auto; }
-  .stickyContainer { position: relative; height: auto; overflow: visible; }
-  .track { display:flex !important; flex-direction:column; position:relative !important; width:100% !important; transform:none !important; height:auto; gap:14vw; padding:60px 6vw 80px; }
-  .ambientLabel { position:relative; left:auto; top:auto; transform:none; padding:60px 6vw 0; }
-  .floatCard { position:relative !important; left:auto !important; top:auto !important; width:100% !important; }
-  .introStencil { display:none; }
+  .scrollSection { height: auto !important; }
+  .stickyContainer { position: relative !important; height: auto !important; overflow: visible !important; transform: none !important; }
+  .track { display: flex !important; flex-direction: column !important; position: relative !important; width: 100% !important; transform: none !important; height: auto !important; gap: 40px !important; padding: 40px 20px 80px !important; }
+  .ambientLabel { position: relative !important; left: auto !important; top: auto !important; transform: none !important; padding: 40px 20px 0 !important; }
+  .floatCard { position: relative !important; left: auto !important; top: auto !important; width: 100% !important; transform: none !important; }
+  .introStencil { display: none !important; }
+  .forestBg { display: none !important; }
+  .desktopVine { display: none !important; }
 }
