@@ -57,7 +57,11 @@ export default function Contact() {
       setTimeout(() => { setTyping(false); setSent(true); }, TYPING_DELAY_FINAL);
 
       // Fire contact API in background — UX is unaffected by network
-      fetch('/api/contact', {
+      const apiUrl = (typeof window !== "undefined" && window.location.hostname === "exzlr.com")
+        ? "https://www.exzlr.com/api/contact"
+        : "/api/contact";
+
+      fetch(apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedReplies),

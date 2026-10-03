@@ -57,8 +57,12 @@ export default function Loader() {
 
     const W = window.innerWidth;
     const H = window.innerHeight;
-    canvas.width  = W;
-    canvas.height = H;
+    const isMobile = W < 768;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    canvas.width  = W * dpr;
+    canvas.height = H * dpr;
+    ctx.scale(dpr, dpr);
 
     const run = () => {
       const off   = document.createElement("canvas");
@@ -70,7 +74,7 @@ export default function Loader() {
       oCtx.fillRect(0, 0, W, H);
       oCtx.fillStyle = "white";
 
-      const fontSize = Math.min(W * 0.18, 180);
+      const fontSize = isMobile ? Math.min(W * 0.22, 92) : Math.min(W * 0.18, 180);
       oCtx.font          = `700 ${fontSize}px 'Cormorant Garamond', serif`;
       oCtx.textAlign     = "center";
       oCtx.textBaseline  = "middle";
@@ -80,8 +84,7 @@ export default function Loader() {
       const imgData   = oCtx.getImageData(0, 0, W, H).data;
       const particles = [];
 
-      const isMobile = W < 768;
-      const step     = isMobile ? 6 : 4;
+      const step     = isMobile ? 3 : 4;
 
       for (let y = 0; y < H; y += step) {
         for (let x = 0; x < W; x += step) {
@@ -91,11 +94,11 @@ export default function Loader() {
               tx: x,
               ty: y,
               angle:     Math.random() * Math.PI * 2,
-              radius:    Math.max(W, H) * (0.8 + Math.random() * 0.5),
+              radius:    Math.max(W, H) * (isMobile ? 0.5 + Math.random() * 0.3 : 0.8 + Math.random() * 0.5),
               spinSpeed: 0.02  + Math.random() * 0.03,
-              speed:     0.014 + Math.random() * 0.014,
+              speed:     isMobile ? 0.024 + Math.random() * 0.02 : 0.014 + Math.random() * 0.014,
               progress:  0,
-              delay:     Math.random() * 40,
+              delay:     Math.random() * (isMobile ? 18 : 40),
               glyph:     GLYPHS[Math.floor(Math.random() * GLYPHS.length)],
               isZ:       x > W * 0.42 && x < W * 0.58,
             });
@@ -111,7 +114,7 @@ export default function Loader() {
         ctx.fillStyle = "rgba(11, 10, 9, 0.45)";
         ctx.fillRect(0, 0, W, H);
 
-        ctx.font          = "9px 'Cormorant Garamond', monospace";
+        ctx.font          = isMobile ? "8px 'Cormorant Garamond', monospace" : "9px 'Cormorant Garamond', monospace";
         ctx.textAlign     = "center";
         ctx.textBaseline  = "middle";
 
@@ -160,11 +163,15 @@ export default function Loader() {
   useEffect(() => {
     if (phase === 0) {
       setPhase(1);
+      const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+      const waitTime = isMobile ? 1800 : 3400;
+      const scanDur  = isMobile ? 650 : SCAN_DUR;
+
       const tScan = setTimeout(() => {
         setPhase(2);
         scanStart.current = performance.now();
         function animScan(now) {
-          const p = Math.min((now - scanStart.current) / SCAN_DUR, 1);
+          const p = Math.min((now - scanStart.current) / scanDur, 1);
           setScan(p);
           if (p < 1) {
             scanRef.current = requestAnimationFrame(animScan);
@@ -173,7 +180,7 @@ export default function Loader() {
           }
         }
         scanRef.current = requestAnimationFrame(animScan);
-      }, 3400);
+      }, waitTime);
       videoTimers.current = { tScan };
     }
   }, [phase]);

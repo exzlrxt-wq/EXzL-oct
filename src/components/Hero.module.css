@@ -265,3 +265,42 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 0 20px 60px;
+    min-height: 100svh;
+  }
+  .title {
+    font-size: clamp(38px, 11vw, 56px);
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+  }
+  .title em {
+    padding: 2px 8px;
+    margin: -2px -8px;
+  }
+  .stencilDesign {
+    display: none;
+  }
+  .badge {
+    margin-bottom: 18px;
+  }
+  .subGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 28px;
+  }
+  .bottom {
+    margin-top: 28px;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .cta {
+    width: 100%;
+    text-align: center;
+    padding: 14px 20px;
+  }
+}
+

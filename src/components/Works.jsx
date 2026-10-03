@@ -1,10 +1,7 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "framer-motion";
 import styles from "./Works.module.css";
-
-const TRAVEL  = 218;
-const TRACK_W = 320;
 
 const works = [
   { num:"01", title:"Command Centre",    year:"2024", cat:"SaaS · Dashboard",  video:"/videos/video1.mov", tag:"SaaS", pos:{ left:"110vw", top:"30vh", width:"36vw"  }, dir: 1  },
@@ -16,7 +13,7 @@ const works = [
 ];
 
 /* Per-card parallax drift — enters from diagonal, floats while visible */
-function ProjectCard({ work, scrollYProgress }) {
+function ProjectCard({ work, scrollYProgress, isMobile }) {
   // Safely bound the ranges to prevent Framer Motion duplication errors
   const centers = [0.29, 0.38, 0.46, 0.54, 0.60, 0.67];
   const enter = centers[works.indexOf(work)] || 0.5;
@@ -36,7 +33,7 @@ function ProjectCard({ work, scrollYProgress }) {
   return (
     <motion.div
       className={styles.floatCard}
-      style={{ left:work.pos.left, top:work.pos.top, width:work.pos.width, y:cardY, rotate }}
+      style={isMobile ? {} : { left:work.pos.left, top:work.pos.top, width:work.pos.width, y:cardY, rotate }}
     >
       <div className={styles.vidWrap}>
         <video src={work.video} className={styles.vid} autoPlay muted loop playsInline preload="metadata" />
@@ -56,6 +53,14 @@ function ProjectCard({ work, scrollYProgress }) {
 export default function Works() {
   const ref     = useRef(null);
   const reduced = useReducedMotion();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 900);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   // 'start end' → 'end start' tracks full section journey through viewport
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
@@ -85,48 +90,51 @@ export default function Works() {
 
   return (
     <section ref={ref} id="work" className={styles.scrollSection}>
-      <motion.div className={styles.stickyContainer} style={reduced ? {} : { y: containerY }}>
+      <motion.div className={styles.stickyContainer} style={(reduced || isMobile) ? {} : { y: containerY }}>
 
-        {/* forest background — now parallaxes out left at the end */}
+        {/* forest background */}
         <motion.img 
           src="/forest 3_nobg.png 11-36-35-396.png" 
           alt="" 
           aria-hidden="true" 
           className={styles.forestBg} 
-          style={reduced ? {} : { x: bgX }} 
+          style={(reduced || isMobile) ? {} : { x: bgX }} 
         />
 
-        {/* WORK stencil — now parallaxes out left at the end */}
-        <motion.div 
-          className={styles.introStencil} 
-          aria-hidden="true"
-          style={reduced ? {} : { x: stencilX }}
-        >
-          DEPLOY
-        </motion.div>
+        {/* WORK stencil */}
+        {!isMobile && (
+          <motion.div 
+            className={styles.introStencil} 
+            aria-hidden="true"
+            style={reduced ? {} : { x: stencilX }}
+          >
+            DEPLOY
+          </motion.div>
+        )}
 
-        {/* archive label — slides in from left, parallaxes out. No more fading! */}
+        {/* archive label */}
         <motion.div
           className={styles.ambientLabel}
-          style={reduced ? {} : { x: labelX }}
+          style={(reduced || isMobile) ? {} : { x: labelX }}
         >
           <span className="section-label" style={{ marginBottom:16 }}>Live Deployments · 2020—Present</span>
           <div className={styles.introTitle}>The<br /><em>Stack.</em></div>
           <p className={styles.introHint}>Scroll to explore →</p>
         </motion.div>
 
-        {/* panning track with per-card parallax + ending illustrations */}
-        <motion.div className={styles.track} style={{ x: reduced ? 0 : x, width:`400vw` }}>
+        {/* panning track on desktop / clean vertical feed on mobile */}
+        <motion.div className={styles.track} style={isMobile ? {} : { x: reduced ? 0 : x, width:`400vw` }}>
           {works.map(w => (
-            <ProjectCard key={w.num} work={w} scrollYProgress={scrollYProgress} />
+            <ProjectCard key={w.num} work={w} scrollYProgress={scrollYProgress} isMobile={isMobile} />
           ))}
 
-          {/* Floating vine illustration at the end of the horizontal track, low opacity */}
-          <motion.img 
-            src="/vine_nobg.png" 
-            alt="" aria-hidden="true" 
-            style={{ position: "absolute", left: "330vw", top: "35vh", width: "40vw", opacity: 0.12, y: useTransform(scrollYProgress, [0.75, 1], [50, -150]) }} 
-          />
+          {!isMobile && (
+            <motion.img 
+              src="/vine_nobg.png" 
+              alt="" aria-hidden="true" 
+              style={{ position: "absolute", left: "330vw", top: "35vh", width: "40vw", opacity: 0.12, y: useTransform(scrollYProgress, [0.75, 1], [50, -150]) }} 
+            />
+          )}
         </motion.div>
 
       </motion.div>
