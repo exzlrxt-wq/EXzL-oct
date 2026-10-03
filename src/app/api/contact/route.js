@@ -1,23 +1,6 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-// Simple in-memory rate limiter — max 10 submissions per IP per 10 minutes
-const rateLimitMap = new Map();
-const RATE_LIMIT = 10;
-const WINDOW_MS = 10 * 60 * 1000; // 10 minutes
-
-function isRateLimited(ip) {
-  const now = Date.now();
-  const entry = rateLimitMap.get(ip);
-  if (!entry || now - entry.ts > WINDOW_MS) {
-    rateLimitMap.set(ip, { count: 1, ts: now });
-    return false;
-  }
-  if (entry.count >= RATE_LIMIT) return true;
-  entry.count++;
-  return false;
-}
-
 export async function POST(request) {
   try {
     const apiKey = process.env.RESEND_API_KEY;
@@ -28,12 +11,7 @@ export async function POST(request) {
       }, { status: 500 });
     }
 
-    // Rate limit by IP
     const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
-    if (isRateLimited(ip)) {
-      return NextResponse.json({ error: 'Too many requests. Try again later.' }, { status: 429 });
-    }
-
     const body = await request.json();
     const { name, email, phone, project } = body;
 
@@ -42,17 +20,17 @@ export async function POST(request) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    // Input length limits to prevent abuse
+    // Basic length sanity check
     if (
-      String(name).length > 100 ||
+      String(name).length > 200 ||
       String(email).length > 200 ||
-      String(project).length > 2000 ||
-      (phone && String(phone).length > 30)
+      String(project).length > 3000 ||
+      (phone && String(phone).length > 50)
     ) {
       return NextResponse.json({ error: 'Input too long' }, { status: 400 });
     }
 
-    // Basic email format check
+    // Email format check
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return NextResponse.json({ error: 'Invalid email address' }, { status: 400 });
