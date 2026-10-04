@@ -8,7 +8,7 @@ const works = [
   { num:"02", title:"Interface Systems", year:"2024", cat:"UI · Components",   video:"/videos/video2.mov", tag:"UI",   pos:{ left:"152vw", top:"8vh",  width:"23vw"  }, dir:-1  },
   { num:"03", title:"Orbit Platform",    year:"2024", cat:"SaaS · Product",    video:"/videos/video3.mov", tag:"SaaS", pos:{ left:"186vw", top:"46vh", width:"32vw"  }, dir: 1  },
   { num:"04", title:"Pocket UI",         year:"2023", cat:"Mobile · App",      video:"/videos/video4.mov", tag:"UI",   pos:{ left:"222vw", top:"10vh", width:"20vw"  }, dir:-1  },
-  { num:"05", title:"Signal Web",        year:"2023", cat:"Web · Landing",     video:"/videos/video6.mov", tag:"Web",  pos:{ left:"250vw", top:"44vh", width:"33vw"  }, dir: 1  },
+  { num:"05", title:"Kala Tutorium",     year:"2023", cat:"EdTech · Platform", video:"/videos/video6.mov", tag:"EdTech", pos:{ left:"250vw", top:"44vh", width:"33vw"  }, dir: 1  },
   { num:"06", title:"Atlas App",         year:"2022", cat:"SaaS · Web App",    video:"/videos/video7.mov", tag:"SaaS", pos:{ left:"282vw", top:"12vh", width:"27vw"  }, dir:-1  },
 ];
 

@@ -25,19 +25,27 @@
 }
 
 .heading {
-  font-size: clamp(2rem, 5vw, 3.4rem);
-  font-weight: 600;
-  line-height: 1.15;
+  font-family: var(--serif);
+  font-size: clamp(38px, 5.5vw, 76px);
+  font-weight: 700;
+  line-height: 1.05;
   letter-spacing: -0.025em;
   margin-top: 0.75rem;
 }
 
+.heading em {
+  font-style: italic;
+  color: var(--acid);
+}
+
 .body {
-  max-width: 600px;
+  max-width: 640px;
   margin: 1.5rem auto 0;
-  font-size: clamp(0.95rem, 1.2vw, 1.1rem);
-  line-height: 1.65;
-  color: var(--text-muted, rgba(232, 227, 216, 0.6));
+  font-family: var(--serif);
+  font-size: clamp(14px, 1.2vw, 18px);
+  font-style: italic;
+  line-height: 1.7;
+  color: var(--ink2);
 }
 
 /* ── Role Grid ───────────────────────────────────────────────── */

@@ -103,10 +103,10 @@ export default function ConsultingProjects() {
               </ParallaxCard>
               <ParallaxCard speed={120}>
                 <div className={styles.proofCard}>
-                  <div className={styles.proofCardCat}>Regulatory Automation</div>
-                  <div className={styles.proofCardName}>ComplianceFlow</div>
+                  <div className={styles.proofCardCat}>EdTech · Web Platform</div>
+                  <div className={styles.proofCardName}>Kala Tutorium</div>
                   <div className={styles.proofCardDesc}>
-                    All compliance deadlines automated — filing reminders, status tracking, team alerts. One system for all regulatory requirements.
+                    Custom education platform and student portal — interactive curriculum display, course discovery, and modern digital presence.
                   </div>
                   <div className={styles.mediaWrap}>
                     <video src="/videos/video6.mov" className={styles.vid} autoPlay muted loop playsInline preload="metadata" />

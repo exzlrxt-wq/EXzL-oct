@@ -2,8 +2,6 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import BFloatStr from "./BFloatStr";
-import RevealClip from "./RevealClip";
 import styles from "./About.module.css";
 
 /** @type {string[]} */
@@ -46,11 +44,12 @@ export default function About() {
             />
             <div className={styles.deco} />
           </motion.div>
-          </motion.div>
+        </motion.div>
 
         <div className={styles.text}>
           <motion.div
             className="section-label"
+            style={{ marginBottom: 20 }}
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
@@ -59,19 +58,12 @@ export default function About() {
             Platform
           </motion.div>
 
-          <RevealClip delay={0.1}>
-            <h2 className={styles.heading}>
-              <BFloatStr text="The engine" /><br />
-              <BFloatStr text="behind the " /><em><BFloatStr text="operation." /></em>
-            </h2>
-          </RevealClip>
-
           <motion.p
             className={styles.body}
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
           >
             A business operating system built around the gap between what companies plan and what actually runs. Every workflow load-bearing. Every result traceable.
           </motion.p>
@@ -81,7 +73,7 @@ export default function About() {
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
             EXZLR is the technology and AI brand of Kaltech Wayducation Pvt. Ltd., focused on building software, automation platforms, and digital solutions for modern businesses. Working with founders and teams globally.
           </motion.p>
@@ -91,7 +83,7 @@ export default function About() {
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
           >
             {skills.map((sk) => (
               <span key={sk} className={`${styles.sk} sk`}>{sk}</span>
