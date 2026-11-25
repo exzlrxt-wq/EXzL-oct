@@ -28,6 +28,7 @@ export default function GlyphBg() {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
+    const serifFont = getComputedStyle(document.documentElement).getPropertyValue("--font-cormorant").trim() || "'Cormorant Garamond', serif";
     let W, H;
 
     function resize() {
@@ -56,7 +57,7 @@ export default function GlyphBg() {
         ctx.setTransform(1, 0, 0, 1, (s.x / 100) * W, (s.y / 100) * H);
         ctx.rotate(s.rot);
         
-        ctx.font = `700 ${s.size}px 'Cormorant Garamond', serif`;
+        ctx.font = `700 ${s.size}px ${serifFont}`;
         ctx.fillStyle = `rgba(141, 181, 122, ${s.opacity})`;
         
         ctx.fillText(s.glyph, 0, 0);

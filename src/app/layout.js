@@ -2,6 +2,46 @@ import "./globals.css";
 import SmoothScrolling from "@/components/SmoothScrolling";
 import GrainOverlay from "@/components/GrainOverlay";
 import GlobalTransition from "@/components/GlobalTransition";
+import {
+  Cormorant_Garamond,
+  Syne,
+  JetBrains_Mono,
+  Space_Grotesk,
+  Inter,
+} from "next/font/google";
+
+// Self-hosted via Vercel CDN — zero external DNS, zero render block
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["300", "400", "600", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
+  variable: "--font-cormorant",
+});
+const syne = Syne({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+  variable: "--font-syne",
+});
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["300", "400", "500"],
+  display: "swap",
+  variable: "--font-mono",
+});
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  display: "swap",
+  variable: "--font-grotesk",
+});
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  display: "swap",
+  variable: "--font-inter",
+});
 
 export const metadata = {
   metadataBase: new URL('https://exzlr.com'),
@@ -88,28 +128,17 @@ const jsonLd = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className={`${cormorant.variable} ${syne.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable} ${inter.variable}`}
+    >
       <head>
         {/* JSON-LD Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-
-        {/* Preload critical hero fonts to eliminate FOUT */}
-        <link
-          rel="preload"
-          as="style"
-          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,700;1,400&family=Syne:wght@700;800&display=swap"
-        />
-
-        {/* All fonts — single consolidated request */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,700&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Space+Grotesk:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap"
-          rel="stylesheet"
-        />
+        {/* Fonts are now self-hosted via next/font — no external link tags needed */}
       </head>
       <body>
         <GlobalTransition />

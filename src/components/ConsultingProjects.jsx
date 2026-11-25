@@ -1,6 +1,7 @@
 "use client";
 import { useRef } from "react";
 import { motion, useInView, useScroll, useTransform, useSpring } from "framer-motion";
+import SmartVideo from "./SmartVideo";
 import styles from "./ConsultingProjects.module.css";
 
 // Parallax wrapper for vertical scroll
@@ -54,7 +55,7 @@ export default function ConsultingProjects() {
                     Every agent board is powered by a JSON-to-UI rendering engine built from scratch — zero repeated UI logic across 7 completely different agent types. This is the kind of architectural decision that separates builders from developers.
                   </div>
                   <div className={styles.mediaWrap}>
-                    <video src="/videos/video1.mov" className={styles.vid} autoPlay muted loop playsInline preload="metadata" />
+                    <SmartVideo src="/videos/video1.mp4" className={styles.vid} />
                   </div>
                 </div>
               </div>
@@ -70,7 +71,7 @@ export default function ConsultingProjects() {
                     AI co-composer generating musical DNA — seeds, theory-driven blueprints, MIDI-first output. Respects Indian classical music while embracing Western fusion. For composers, not casual users.
                   </div>
                   <div className={styles.mediaWrap}>
-                    <video src="/videos/video2.mov" className={styles.vid} autoPlay muted loop playsInline preload="metadata" />
+                    <SmartVideo src="/videos/video2.mp4" className={styles.vid} />
                   </div>
                 </div>
               </ParallaxCard>
@@ -82,7 +83,7 @@ export default function ConsultingProjects() {
                     4D world interface for meditation, lunar cycle tracking, and spiritual practice. Rich feature set, immersive UI.
                   </div>
                   <div className={styles.mediaWrap}>
-                    <video src="/videos/video3.mov" className={styles.vid} autoPlay muted loop playsInline preload="metadata" />
+                    <SmartVideo src="/videos/video3.mp4" className={styles.vid} />
                   </div>
                 </div>
               </ParallaxCard>
@@ -97,7 +98,7 @@ export default function ConsultingProjects() {
                     End-to-end lead capture, scoring, routing, and multi-touch follow-up — configurable per business, multi-channel.
                   </div>
                   <div className={styles.mediaWrap}>
-                    <video src="/videos/video4.mov" className={styles.vid} autoPlay muted loop playsInline preload="metadata" />
+                    <SmartVideo src="/videos/video4.mp4" className={styles.vid} />
                   </div>
                 </div>
               </ParallaxCard>
@@ -109,7 +110,7 @@ export default function ConsultingProjects() {
                     Custom education platform and student portal — interactive curriculum display, course discovery, and modern digital presence.
                   </div>
                   <div className={styles.mediaWrap}>
-                    <video src="/videos/video6.mov" className={styles.vid} autoPlay muted loop playsInline preload="metadata" />
+                    <SmartVideo src="/videos/video6.mp4" className={styles.vid} />
                   </div>
                 </div>
               </ParallaxCard>
@@ -124,7 +125,7 @@ export default function ConsultingProjects() {
                     Carbon footprint CRM with marketplace offset integration — built for corporate sustainability reporting and offset purchasing.
                   </div>
                   <div className={styles.mediaWrap}>
-                    <video src="/videos/video7.mov" className={styles.vid} autoPlay muted loop playsInline preload="metadata" />
+                    <SmartVideo src="/videos/video7.mp4" className={styles.vid} />
                   </div>
                 </div>
               </ParallaxCard>

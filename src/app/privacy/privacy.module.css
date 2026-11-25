@@ -14,7 +14,7 @@
 }
 
 .title {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-grotesk), 'Space Grotesk', sans-serif;
   font-size: clamp(36px, 5vw, 64px);
   font-weight: 600;
   color: #F5F4F0;
@@ -23,7 +23,7 @@
 }
 
 .meta {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-inter), 'Inter', sans-serif;
   font-size: 13px;
   color: #3E3D3A;
   margin: 0;
@@ -38,7 +38,7 @@
 }
 
 .section h2 {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-grotesk), 'Space Grotesk', sans-serif;
   font-size: 15px;
   font-weight: 600;
   color: #F5F4F0;
@@ -47,7 +47,7 @@
 }
 
 .section p {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-inter), 'Inter', sans-serif;
   font-size: 15px;
   line-height: 1.75;
   color: #7E7D79;
@@ -60,7 +60,7 @@
 }
 
 .section li {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-inter), 'Inter', sans-serif;
   font-size: 15px;
   line-height: 1.75;
   color: #7E7D79;

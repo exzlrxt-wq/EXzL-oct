@@ -64,7 +64,18 @@ export default function Loader() {
     canvas.height = H * dpr;
     ctx.scale(dpr, dpr);
 
-    const run = () => {
+    const run = async () => {
+      const serifFont = getComputedStyle(document.documentElement).getPropertyValue("--font-cormorant").trim() || "'Cormorant Garamond', serif";
+      const fontSize = isMobile ? Math.min(W * 0.22, 92) : Math.min(W * 0.18, 180);
+
+      if (document.fonts && document.fonts.ready) {
+        await Promise.race([
+          document.fonts.load(`700 ${fontSize}px ${serifFont}`).then(() => document.fonts.ready),
+          new Promise((resolve) => setTimeout(resolve, 350)),
+        ]);
+      }
+      if (!particlesInit.current) return;
+
       const off   = document.createElement("canvas");
       off.width   = W;
       off.height  = H;
@@ -74,8 +85,7 @@ export default function Loader() {
       oCtx.fillRect(0, 0, W, H);
       oCtx.fillStyle = "white";
 
-      const fontSize = isMobile ? Math.min(W * 0.22, 92) : Math.min(W * 0.18, 180);
-      oCtx.font          = `700 ${fontSize}px 'Cormorant Garamond', serif`;
+      oCtx.font          = `700 ${fontSize}px ${serifFont}`;
       oCtx.textAlign     = "center";
       oCtx.textBaseline  = "middle";
       oCtx.letterSpacing = "-0.04em";
@@ -109,12 +119,13 @@ export default function Loader() {
       let frame = 0;
 
       const draw = () => {
+        if (!particlesInit.current) return;
         ctx.clearRect(0, 0, W, H);
         
         ctx.fillStyle = "rgba(11, 10, 9, 0.45)";
         ctx.fillRect(0, 0, W, H);
 
-        ctx.font          = isMobile ? "8px 'Cormorant Garamond', monospace" : "9px 'Cormorant Garamond', monospace";
+        ctx.font          = isMobile ? `8px ${serifFont}` : `9px ${serifFont}`;
         ctx.textAlign     = "center";
         ctx.textBaseline  = "middle";
 

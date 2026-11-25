@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import Image from "next/image";
 import {
   motion,
   useScroll,
@@ -127,19 +128,19 @@ export default function StatementSection() {
         <div className={styles.sticky}>
 
           {/* ── Ambient signal mark ── */}
-          <motion.img src="/signal_mark_nobg.png" alt="" aria-hidden="true"
-            className={styles.mark}
-            style={reduced ? {} : { opacity: markOp, rotate: markR }} />
+          <motion.div className={styles.mark} style={reduced ? {} : { opacity: markOp, rotate: markR }} aria-hidden="true">
+            <Image src="/signal_mark_nobg.png" alt="" width={1024} height={1024} sizes="52vw" style={{ width: "100%", height: "auto", display: "block" }} loading="lazy" />
+          </motion.div>
 
           {/* ── Monstera: bottom-left ── */}
-          <motion.img src="/monstera_nobg.png" alt="" aria-hidden="true"
-            className={styles.monstera}
-            style={reduced ? {} : { y: monParY }} />
+          <motion.div className={styles.monstera} style={reduced ? {} : { y: monParY }} aria-hidden="true">
+            <Image src="/monstera_nobg.png" alt="" width={1024} height={819} sizes="38vw" style={{ width: "100%", height: "auto", display: "block" }} loading="lazy" />
+          </motion.div>
 
           {/* ── Fern: top-right ── */}
-          <motion.img src="/fern_nobg.png" alt="" aria-hidden="true"
-            className={styles.fern}
-            style={reduced ? {} : { y: fernParY }} />
+          <motion.div className={styles.fern} style={reduced ? {} : { y: fernParY }} aria-hidden="true">
+            <Image src="/fern_nobg.png" alt="" width={1024} height={1024} sizes="28vw" style={{ width: "100%", height: "auto", display: "block" }} loading="lazy" />
+          </motion.div>
 
           {/* Main content — scroll-driven y lift only, no conflicting whileInView */}
           <motion.div className={styles.inner} style={reduced ? {} : { y: contentY }}>
@@ -198,14 +199,20 @@ export default function StatementSection() {
 
 
           {/* Book-match PNG — inside sticky, spring-faded opacity so it never pops */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <motion.img
-            src="/forest top_nobg.png"
-            alt=""
-            aria-hidden="true"
+          <motion.div
             className={styles.forestBottom}
-            style={reduced ? {} : { opacity: forestBottomOp }}
-          />
+            style={reduced ? {} : { opacity: forestBottomOp, position: "absolute" }}
+          >
+            <Image
+              src="/forest top_nobg.png"
+              alt=""
+              aria-hidden="true"
+              fill
+              sizes="100vw"
+              style={{ objectFit: "cover", objectPosition: "center top" }}
+              loading="lazy"
+            />
+          </motion.div>
 
         </div>
       </div>

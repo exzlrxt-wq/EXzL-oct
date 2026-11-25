@@ -1,19 +1,21 @@
 "use client";
-import { useRef } from "react";
-import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import { motion, useScroll, useTransform, useSpring, useMotionValueEvent, useReducedMotion } from "framer-motion";
+import SmartVideo from "./SmartVideo";
 import styles from "./Works.module.css";
 
 const works = [
-  { num:"01", title:"Command Centre",    year:"2024", cat:"SaaS · Dashboard",  video:"/videos/video1.mov", tag:"SaaS", pos:{ left:"110vw", top:"30vh", width:"36vw"  }, dir: 1  },
-  { num:"02", title:"Interface Systems", year:"2024", cat:"UI · Components",   video:"/videos/video2.mov", tag:"UI",   pos:{ left:"152vw", top:"8vh",  width:"23vw"  }, dir:-1  },
-  { num:"03", title:"Orbit Platform",    year:"2024", cat:"SaaS · Product",    video:"/videos/video3.mov", tag:"SaaS", pos:{ left:"186vw", top:"46vh", width:"32vw"  }, dir: 1  },
-  { num:"04", title:"Pocket UI",         year:"2023", cat:"Mobile · App",      video:"/videos/video4.mov", tag:"UI",   pos:{ left:"222vw", top:"10vh", width:"20vw"  }, dir:-1  },
-  { num:"05", title:"Kala Tutorium",     year:"2023", cat:"EdTech · Platform", video:"/videos/video6.mov", tag:"EdTech", pos:{ left:"250vw", top:"44vh", width:"33vw"  }, dir: 1  },
-  { num:"06", title:"Atlas App",         year:"2022", cat:"SaaS · Web App",    video:"/videos/video7.mov", tag:"SaaS", pos:{ left:"282vw", top:"12vh", width:"27vw"  }, dir:-1  },
+  { num:"01", title:"Command Centre",    year:"2024", cat:"SaaS · Dashboard",  video:"/videos/video1.mp4", tag:"SaaS", pos:{ left:"110vw", top:"30vh", width:"36vw"  }, dir: 1  },
+  { num:"02", title:"Interface Systems", year:"2024", cat:"UI · Components",   video:"/videos/video2.mp4", tag:"UI",   pos:{ left:"152vw", top:"8vh",  width:"23vw"  }, dir:-1  },
+  { num:"03", title:"Orbit Platform",    year:"2024", cat:"SaaS · Product",    video:"/videos/video3.mp4", tag:"SaaS", pos:{ left:"186vw", top:"46vh", width:"32vw"  }, dir: 1  },
+  { num:"04", title:"Pocket UI",         year:"2023", cat:"Mobile · App",      video:"/videos/video4.mp4", tag:"UI",   pos:{ left:"222vw", top:"10vh", width:"20vw"  }, dir:-1  },
+  { num:"05", title:"Kala Tutorium",     year:"2023", cat:"EdTech · Platform", video:"/videos/video6.mp4", tag:"EdTech", pos:{ left:"250vw", top:"44vh", width:"33vw"  }, dir: 1  },
+  { num:"06", title:"Atlas App",         year:"2022", cat:"SaaS · Web App",    video:"/videos/video7.mp4", tag:"SaaS", pos:{ left:"282vw", top:"12vh", width:"27vw"  }, dir:-1  },
 ];
 
 /* Per-card parallax drift — enters from diagonal, floats while visible */
-function ProjectCard({ work, scrollYProgress }) {
+function ProjectCard({ work, scrollYProgress, panX, reduced }) {
   const centers = [0.29, 0.38, 0.46, 0.54, 0.60, 0.67];
   const enter = centers[works.indexOf(work)] || 0.5;
   const startP = Math.max(0, enter - 0.20);
@@ -29,13 +31,48 @@ function ProjectCard({ work, scrollYProgress }) {
     [work.dir * 2.5, 0],
   );
 
+  // Track spring panX + scrollYProgress so videos don't all stream/decode during Hero/Loader
+  const leftVw = parseFloat(work.pos.left);
+  const widthVw = parseFloat(work.pos.width);
+  const [videoActive, setVideoActive] = useState(undefined);
+  const prevActiveRef = useRef(undefined);
+
+  const evaluateActive = () => {
+    if (typeof window === "undefined" || window.innerWidth <= 900 || reduced) {
+      if (prevActiveRef.current !== undefined) {
+        prevActiveRef.current = undefined;
+        setVideoActive(undefined);
+      }
+      return;
+    }
+    const p = scrollYProgress.get();
+    const trackX = panX.get();
+    const screenLeft = leftVw + trackX;
+    const screenRight = screenLeft + widthVw;
+    const next = p >= 0.08 && screenRight > -50 && screenLeft < 175;
+    if (next !== prevActiveRef.current) {
+      prevActiveRef.current = next;
+      setVideoActive(next);
+    }
+  };
+
+  useEffect(() => {
+    evaluateActive();
+    window.addEventListener("resize", evaluateActive, { passive: true });
+    return () => window.removeEventListener("resize", evaluateActive);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [reduced]);
+
+  useMotionValueEvent(scrollYProgress, "change", evaluateActive);
+  useMotionValueEvent(panX, "change", evaluateActive);
+
   return (
     <motion.div
       className={styles.floatCard}
       style={{ left: work.pos.left, top: work.pos.top, width: work.pos.width, y: cardY, rotate }}
     >
       <div className={styles.vidWrap}>
-        <video src={work.video} className={styles.vid} autoPlay muted loop playsInline preload="metadata" />
+        <SmartVideo src={work.video} className={styles.vid} active={videoActive} />
       </div>
       <div className={styles.floatLabel}>
         <div className={styles.labelTop}>
@@ -86,13 +123,21 @@ export default function Works() {
       <motion.div className={styles.stickyContainer} style={reduced ? {} : { y: containerY }}>
 
         {/* forest background */}
-        <motion.img 
-          src="/forest 3_nobg.png 11-36-35-396.png" 
-          alt="" 
-          aria-hidden="true" 
-          className={styles.forestBg} 
-          style={reduced ? {} : { x: bgX }} 
-        />
+        <motion.div
+          className={styles.forestBg}
+          style={reduced ? { position: "absolute" } : { position: "absolute", x: bgX }}
+          aria-hidden="true"
+        >
+          <Image
+            src="/forest 3_nobg.png 11-36-35-396.png"
+            alt=""
+            aria-hidden="true"
+            fill
+            sizes="100vw"
+            style={{ objectFit: "cover", objectPosition: "left top" }}
+            loading="lazy"
+          />
+        </motion.div>
 
         {/* WORK stencil */}
         <motion.div 
@@ -116,15 +161,25 @@ export default function Works() {
         {/* panning track on desktop */}
         <motion.div className={styles.track} style={{ x: reduced ? 0 : x }}>
           {works.map(w => (
-            <ProjectCard key={w.num} work={w} scrollYProgress={scrollYProgress} />
+            <ProjectCard key={w.num} work={w} scrollYProgress={scrollYProgress} panX={panX} reduced={reduced} />
           ))}
 
-          <motion.img 
-            src="/vine_nobg.png" 
-            alt="" aria-hidden="true" 
+          <motion.div
             className={styles.desktopVine}
-            style={{ position: "absolute", left: "330vw", top: "35vh", width: "40vw", opacity: 0.12, y: vineY }} 
-          />
+            style={{ position: "absolute", left: "330vw", top: "35vh", width: "40vw", opacity: 0.12, y: vineY }}
+            aria-hidden="true"
+          >
+            <Image
+              src="/vine_nobg.png"
+              alt=""
+              aria-hidden="true"
+              width={1024}
+              height={1024}
+              sizes="40vw"
+              style={{ width: "100%", height: "auto", display: "block" }}
+              loading="lazy"
+            />
+          </motion.div>
         </motion.div>
 
       </motion.div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform, useMotionTemplate } from "framer-motion";
 import BFloatStr from "./BFloatStr";
 import styles from "./Hero.module.css";
@@ -38,10 +39,12 @@ export default function Hero() {
   return (
     <section className={styles.hero} id="home">
       {/* ── Botanical layers — parallax float, screen blend ── */}
-      <motion.img src="/palm_nobg.png" alt="" aria-hidden="true"
-        className={styles.botPalm} style={{ y: palmY, rotate: -20, scaleX: -1 }} />
-      <motion.img src="/vine_nobg.png" alt="" aria-hidden="true"
-        className={styles.botVine} style={{ y: vineY }} />
+      <motion.div className={styles.botPalm} style={{ y: palmY, rotate: -20, scaleX: -1 }} aria-hidden="true">
+        <Image src="/palm_nobg.png" alt="" width={1024} height={1024} sizes="(max-width: 768px) 260px, 36vw" style={{ width: "100%", height: "auto", display: "block" }} />
+      </motion.div>
+      <motion.div className={styles.botVine} style={{ y: vineY }} aria-hidden="true">
+        <Image src="/vine_nobg.png" alt="" width={1024} height={1024} sizes="(max-width: 768px) 280px, 42vw" style={{ width: "100%", height: "auto", display: "block" }} />
+      </motion.div>
 
       {/* Background Stencil */}
       <motion.div style={{ transform }} className={`stencil ${styles.stencilDesign}`}>

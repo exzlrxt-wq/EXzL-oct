@@ -1,14 +1,13 @@
 "use client";
 
+import Image from "next/image";
 import styles from "./Consulting.module.css";
 
 export default function ConsultingHero() {
   return (
     <section className={styles.hero}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/palm_nobg.png" alt="" width={400} height={600} style={{ opacity: 0.1, maxWidth: '400px', position: 'absolute', top: 0, right: '-10vw', pointerEvents: 'none' }} className={styles.botPalm} />
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/vine_nobg.png" alt="" width={600} height={800} style={{ opacity: 0.08, maxWidth: '600px', position: 'absolute', top: '40%', left: '-20vw', pointerEvents: 'none' }} className={styles.botVine} />
+      <Image src="/palm_nobg.png" alt="" width={1024} height={1024} sizes="400px" style={{ opacity: 0.1, maxWidth: '400px', height: 'auto', position: 'absolute', top: 0, right: '-10vw', pointerEvents: 'none' }} className={styles.botPalm} loading="lazy" />
+      <Image src="/vine_nobg.png" alt="" width={1024} height={1024} sizes="600px" style={{ opacity: 0.08, maxWidth: '600px', height: 'auto', position: 'absolute', top: '40%', left: '-20vw', pointerEvents: 'none' }} className={styles.botVine} loading="lazy" />
 
       <div className={styles.heroEyebrow}>Ojas / EXZLR</div>
       <h1 className={styles.heroClaim}>

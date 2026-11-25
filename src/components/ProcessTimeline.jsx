@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "framer-motion";
 import RevealClip from "./RevealClip";
 import styles from "./ProcessTimeline.module.css";
@@ -100,8 +101,17 @@ export default function ProcessTimeline() {
       </motion.div>
 
       {/* Book-match PNG — normal orientation, solid at top (seam), fades into Process */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/forest top_nobg.png" alt="" className={styles.forestTopMask} aria-hidden="true" />
+      <div className={styles.forestTopMask} style={{ position: "absolute" }}>
+        <Image
+          src="/forest top_nobg.png"
+          alt=""
+          aria-hidden="true"
+          fill
+          sizes="100vw"
+          style={{ objectFit: "cover", objectPosition: "center top" }}
+          loading="lazy"
+        />
+      </div>
     </section>
   );
 }

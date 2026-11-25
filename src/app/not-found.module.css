@@ -13,7 +13,7 @@
 }
 
 .heading {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-grotesk), 'Space Grotesk', sans-serif;
   font-size: clamp(38px, 6vw, 72px);
   font-weight: 700;
   line-height: 1;
@@ -27,7 +27,7 @@
 }
 
 .sub {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-inter), 'Inter', sans-serif;
   font-size: 16px;
   line-height: 1.7;
   color: #7E7D79;
@@ -41,7 +41,7 @@
 }
 
 .primary {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-grotesk), 'Space Grotesk', sans-serif;
   font-size: 14px;
   font-weight: 500;
   padding: 14px 28px;
@@ -66,7 +66,7 @@
 .primary:hover::after { transform: translateX(100%); }
 
 .ghost {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-grotesk), 'Space Grotesk', sans-serif;
   font-size: 14px;
   padding: 14px 24px;
   border: 1px solid #282828;

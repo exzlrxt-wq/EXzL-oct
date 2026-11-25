@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import RevealClip from "./RevealClip";
 import styles from "./Contact.module.css";
@@ -73,8 +74,7 @@ export default function Contact() {
   return (
     <section id="contact" className={styles.section} style={{ position: "relative" }}>
       {/* Botanical layer moved from Process */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/palm_nobg.png" alt="" aria-hidden="true" className={styles.botPalm} />
+      <Image src="/palm_nobg.png" alt="" aria-hidden="true" width={1024} height={1024} sizes="35vw" className={styles.botPalm} loading="lazy" />
 
       <motion.div
         className={styles.header}

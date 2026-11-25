@@ -418,8 +418,6 @@ export default function ComingSoon() {
 
       {/* ── STYLES ── */}
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=JetBrains+Mono:wght@400;500&display=swap');
-
         .cs-hero {
           position: relative;
           width: 100%;
@@ -462,7 +460,7 @@ export default function ComingSoon() {
           max-width: 760px;
         }
         .cs-tag {
-          font-family: 'JetBrains Mono', monospace;
+          font-family: var(--font-mono), 'JetBrains Mono', monospace;
           font-size: 10px;
           letter-spacing: 0.22em;
           text-transform: uppercase;
@@ -472,7 +470,7 @@ export default function ComingSoon() {
           border-radius: 2px;
         }
         .cs-h1 {
-          font-family: 'Cormorant Garamond', Georgia, serif;
+          font-family: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
           font-size: clamp(52px, 9vw, 100px);
           font-weight: 600;
           font-style: italic;
@@ -498,7 +496,7 @@ export default function ComingSoon() {
           padding: 14px 32px;
           background: #6cd186;
           color: #0b0a09;
-          font-family: 'JetBrains Mono', monospace;
+          font-family: var(--font-mono), 'JetBrains Mono', monospace;
           font-size: 12px;
           font-weight: 500;
           letter-spacing: 0.08em;
@@ -514,7 +512,7 @@ export default function ComingSoon() {
           padding: 14px 32px;
           background: transparent;
           color: rgba(232,227,216,0.6);
-          font-family: 'JetBrains Mono', monospace;
+          font-family: var(--font-mono), 'JetBrains Mono', monospace;
           font-size: 12px;
           letter-spacing: 0.08em;
           text-transform: uppercase;
@@ -531,7 +529,7 @@ export default function ComingSoon() {
           left: 50%;
           transform: translateX(-50%);
           z-index: 2;
-          font-family: 'JetBrains Mono', monospace;
+          font-family: var(--font-mono), 'JetBrains Mono', monospace;
           font-size: 9px;
           letter-spacing: 0.2em;
           text-transform: uppercase;
@@ -554,7 +552,7 @@ export default function ComingSoon() {
         }
         .cs-section-tag {
           display: inline-block;
-          font-family: 'JetBrains Mono', monospace;
+          font-family: var(--font-mono), 'JetBrains Mono', monospace;
           font-size: 9px;
           letter-spacing: 0.22em;
           text-transform: uppercase;
@@ -562,7 +560,7 @@ export default function ComingSoon() {
           margin-bottom: 20px;
         }
         .cs-h2 {
-          font-family: 'Cormorant Garamond', Georgia, serif;
+          font-family: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
           font-size: clamp(38px, 5.5vw, 72px);
           font-weight: 600;
           font-style: italic;
@@ -573,7 +571,7 @@ export default function ComingSoon() {
           max-width: 700px;
         }
         .cs-h2-lg {
-          font-family: 'Cormorant Garamond', Georgia, serif;
+          font-family: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
           font-size: clamp(44px, 7vw, 88px);
           font-weight: 600;
           font-style: italic;
@@ -583,7 +581,7 @@ export default function ComingSoon() {
           margin-bottom: 24px;
         }
         .cs-sub-h {
-          font-family: 'JetBrains Mono', monospace;
+          font-family: var(--font-mono), 'JetBrains Mono', monospace;
           font-size: 11px;
           letter-spacing: 0.18em;
           text-transform: uppercase;
@@ -615,14 +613,14 @@ export default function ComingSoon() {
         }
         .cs-stat { display: flex; flex-direction: column; gap: 4px; }
         .cs-stat-n {
-          font-family: 'Cormorant Garamond', Georgia, serif;
+          font-family: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
           font-size: clamp(36px, 4vw, 52px);
           font-weight: 600;
           color: #6cd186;
           line-height: 1;
         }
         .cs-stat-l {
-          font-family: 'JetBrains Mono', monospace;
+          font-family: var(--font-mono), 'JetBrains Mono', monospace;
           font-size: 10px;
           letter-spacing: 0.16em;
           text-transform: uppercase;
@@ -655,13 +653,13 @@ export default function ComingSoon() {
           margin-bottom: 20px;
         }
         .cs-ws-num {
-          font-family: 'JetBrains Mono', monospace;
+          font-family: var(--font-mono), 'JetBrains Mono', monospace;
           font-size: 11px;
           color: #6cd186;
           letter-spacing: 0.1em;
         }
         .cs-ws-tag {
-          font-family: 'JetBrains Mono', monospace;
+          font-family: var(--font-mono), 'JetBrains Mono', monospace;
           font-size: 9px;
           letter-spacing: 0.16em;
           text-transform: uppercase;
@@ -671,7 +669,7 @@ export default function ComingSoon() {
           border-radius: 1px;
         }
         .cs-ws-name {
-          font-family: 'Cormorant Garamond', Georgia, serif;
+          font-family: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
           font-size: 28px;
           font-weight: 600;
           font-style: italic;
@@ -685,7 +683,7 @@ export default function ComingSoon() {
           margin-bottom: 14px;
         }
         .cs-ws-detail {
-          font-family: 'JetBrains Mono', monospace;
+          font-family: var(--font-mono), 'JetBrains Mono', monospace;
           font-size: 11px;
           color: rgba(108,209,134,0.6);
           line-height: 1.6;
@@ -722,19 +720,19 @@ export default function ComingSoon() {
           margin-bottom: 12px;
         }
         .cs-module-id {
-          font-family: 'JetBrains Mono', monospace;
+          font-family: var(--font-mono), 'JetBrains Mono', monospace;
           font-size: 10px;
           color: #6cd186;
           letter-spacing: 0.1em;
         }
         .cs-module-ws {
-          font-family: 'JetBrains Mono', monospace;
+          font-family: var(--font-mono), 'JetBrains Mono', monospace;
           font-size: 9px;
           color: rgba(232,227,216,0.2);
           letter-spacing: 0.08em;
         }
         .cs-module-name {
-          font-family: 'Cormorant Garamond', Georgia, serif;
+          font-family: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
           font-size: 22px;
           font-weight: 600;
           font-style: italic;
@@ -764,7 +762,7 @@ export default function ComingSoon() {
           border-bottom: 1px solid rgba(232,227,216,0.07);
         }
         .cs-step-n {
-          font-family: 'JetBrains Mono', monospace;
+          font-family: var(--font-mono), 'JetBrains Mono', monospace;
           font-size: 16px;
           color: #6cd186;
           min-width: 28px;
@@ -772,7 +770,7 @@ export default function ComingSoon() {
         }
         .cs-step-l {
           display: block;
-          font-family: 'JetBrains Mono', monospace;
+          font-family: var(--font-mono), 'JetBrains Mono', monospace;
           font-size: 11px;
           letter-spacing: 0.14em;
           text-transform: uppercase;
@@ -800,7 +798,7 @@ export default function ComingSoon() {
         }
         .cs-tier-card:hover { border-color: rgba(108,209,134,0.2); }
         .cs-tier-n {
-          font-family: 'JetBrains Mono', monospace;
+          font-family: var(--font-mono), 'JetBrains Mono', monospace;
           font-size: 9px;
           letter-spacing: 0.18em;
           text-transform: uppercase;
@@ -809,7 +807,7 @@ export default function ComingSoon() {
           margin-bottom: 10px;
         }
         .cs-tier-name {
-          font-family: 'Cormorant Garamond', Georgia, serif;
+          font-family: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
           font-size: 24px;
           font-weight: 600;
           font-style: italic;
@@ -823,7 +821,7 @@ export default function ComingSoon() {
           margin-bottom: 12px;
         }
         .cs-tier-eg {
-          font-family: 'JetBrains Mono', monospace;
+          font-family: var(--font-mono), 'JetBrains Mono', monospace;
           font-size: 10px;
           color: rgba(108,209,134,0.55);
           line-height: 1.5;
@@ -853,13 +851,13 @@ export default function ComingSoon() {
           border-color: rgba(108,209,134,0.15);
         }
         .cs-layer-n {
-          font-family: 'JetBrains Mono', monospace;
+          font-family: var(--font-mono), 'JetBrains Mono', monospace;
           font-size: 11px;
           color: #6cd186;
           letter-spacing: 0.08em;
         }
         .cs-layer-name {
-          font-family: 'JetBrains Mono', monospace;
+          font-family: var(--font-mono), 'JetBrains Mono', monospace;
           font-size: 12px;
           color: #e8e3d8;
           letter-spacing: 0.04em;
@@ -894,7 +892,7 @@ export default function ComingSoon() {
         .cs-pricing-badge {
           position: absolute;
           top: -1px; right: 20px;
-          font-family: 'JetBrains Mono', monospace;
+          font-family: var(--font-mono), 'JetBrains Mono', monospace;
           font-size: 8px;
           letter-spacing: 0.16em;
           text-transform: uppercase;
@@ -904,14 +902,14 @@ export default function ComingSoon() {
           border-radius: 0 0 3px 3px;
         }
         .cs-pricing-tier {
-          font-family: 'Cormorant Garamond', Georgia, serif;
+          font-family: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
           font-size: 28px;
           font-weight: 600;
           font-style: italic;
           color: #e8e3d8;
         }
         .cs-pricing-ws {
-          font-family: 'JetBrains Mono', monospace;
+          font-family: var(--font-mono), 'JetBrains Mono', monospace;
           font-size: 10px;
           letter-spacing: 0.12em;
           color: #6cd186;

@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import styles from "./About.module.css";
 
@@ -35,10 +36,11 @@ export default function About() {
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
         >
           <motion.div style={{ y: imgY }} className={styles.frame}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="/exzlr-logo-main.png"
               alt="EXZLR Logo"
+              fill
+              sizes="(max-width: 1000px) 400px, 440px"
               loading="lazy"
               style={{ objectFit: 'contain', padding: '2rem', backgroundColor: '#0e0d0b' }}
             />

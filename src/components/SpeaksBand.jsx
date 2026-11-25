@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import styles from "./SpeaksBand.module.css";
 
@@ -11,12 +12,22 @@ export default function SpeaksBand() {
         <div className={styles.scanlines} />
 
         {/* Upside down forest background */}
-        <img 
-          src="/forest top_nobg.png" 
-          alt="" 
-          className={styles.forestBg} 
-          aria-hidden="true" 
-        />
+        {/* next/image: wrapper carries all positioning & scaleY(-1); Image fills it */}
+        <div
+          className={styles.forestBg}
+          style={{ position: "absolute", padding: 0 }}
+          aria-hidden="true"
+        >
+          <Image
+            src="/forest top_nobg.png"
+            alt=""
+            aria-hidden="true"
+            fill
+            sizes="100vw"
+            style={{ objectFit: "cover", objectPosition: "center" }}
+            loading="lazy"
+          />
+        </div>
 
         <div className={styles.row}>
           {/* The new text — pulse effect isolated to 'Signal.' */}

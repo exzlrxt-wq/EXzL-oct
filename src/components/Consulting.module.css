@@ -11,8 +11,8 @@
   --text-3: #3E3D3A;
   --accent: #00C896;
   --accent-dim: rgba(0,200,150,0.08);
-  --font-d: 'Space Grotesk', sans-serif;
-  --font-b: 'Inter', sans-serif;
+  --font-d: var(--font-grotesk), 'Space Grotesk', sans-serif;
+  --font-b: var(--font-inter), 'Inter', sans-serif;
 
   color: var(--text);
   font-family: var(--font-b);
