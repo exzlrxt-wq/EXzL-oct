@@ -102,3 +102,16 @@
   .right { align-items: center; }
   .avail { padding: 48px 24px; }
 }
+
+@media (max-width: 600px) {
+  .avail { padding: 40px 18px; }
+  .txt { font-size: clamp(28px, 8vw, 52px); }
+  .btns { flex-direction: column; gap: 10px; width: 100%; }
+  .btns > * { width: 100%; text-align: center; justify-content: center; }
+  .right { width: 100%; }
+}
+
+@media (max-width: 400px) {
+  .avail { padding: 32px 16px; }
+  .txt { font-size: clamp(24px, 9vw, 42px); }
+}

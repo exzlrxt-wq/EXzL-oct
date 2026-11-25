@@ -13,7 +13,7 @@ export default function ProgressBar() {
     // Lenis fires this in its own RAF loop — perfectly in sync with virtual scroll.
     // `progress` is 0→1, no division needed.
     function onScroll({ progress }) {
-      bar.style.width = progress * 100 + "%";
+      bar.style.transform = `scaleX(${progress})`;
     }
 
     lenis.on("scroll", onScroll);

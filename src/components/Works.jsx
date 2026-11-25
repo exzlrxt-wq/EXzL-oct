@@ -15,9 +15,9 @@ const works = [
 ];
 
 /* Per-card parallax drift — enters from diagonal, floats while visible */
-function ProjectCard({ work, scrollYProgress, panX, reduced }) {
+function ProjectCard({ work, index, scrollYProgress, videoActive, reduced }) {
   const centers = [0.29, 0.38, 0.46, 0.54, 0.60, 0.67];
-  const enter = centers[works.indexOf(work)] || 0.5;
+  const enter = centers[index] || 0.5;
   const startP = Math.max(0, enter - 0.20);
   const endP = Math.min(1, enter + 0.20);
 
@@ -25,46 +25,11 @@ function ProjectCard({ work, scrollYProgress, panX, reduced }) {
     [startP, enter, endP],
     [work.dir * 55, 0, work.dir * -28],
   );
-  const cardY = useSpring(rawY, { stiffness:80, damping:22, mass:0.8 });
+  const cardY = useSpring(rawY, { stiffness: 170, damping: 26, mass: 0.45 });
   const rotate = useTransform(scrollYProgress,
     [startP, enter],
     [work.dir * 2.5, 0],
   );
-
-  // Track spring panX + scrollYProgress so videos don't all stream/decode during Hero/Loader
-  const leftVw = parseFloat(work.pos.left);
-  const widthVw = parseFloat(work.pos.width);
-  const [videoActive, setVideoActive] = useState(undefined);
-  const prevActiveRef = useRef(undefined);
-
-  const evaluateActive = () => {
-    if (typeof window === "undefined" || window.innerWidth <= 900 || reduced) {
-      if (prevActiveRef.current !== undefined) {
-        prevActiveRef.current = undefined;
-        setVideoActive(undefined);
-      }
-      return;
-    }
-    const p = scrollYProgress.get();
-    const trackX = panX.get();
-    const screenLeft = leftVw + trackX;
-    const screenRight = screenLeft + widthVw;
-    const next = p >= 0.08 && screenRight > -50 && screenLeft < 175;
-    if (next !== prevActiveRef.current) {
-      prevActiveRef.current = next;
-      setVideoActive(next);
-    }
-  };
-
-  useEffect(() => {
-    evaluateActive();
-    window.addEventListener("resize", evaluateActive, { passive: true });
-    return () => window.removeEventListener("resize", evaluateActive);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [reduced]);
-
-  useMotionValueEvent(scrollYProgress, "change", evaluateActive);
-  useMotionValueEvent(panX, "change", evaluateActive);
 
   return (
     <motion.div
@@ -86,6 +51,11 @@ function ProjectCard({ work, scrollYProgress, panX, reduced }) {
   );
 }
 
+const CARD_BOUNDS = works.map((w) => ({
+  left: parseFloat(w.pos.left),
+  width: parseFloat(w.pos.width),
+}));
+
 export default function Works() {
   const ref     = useRef(null);
   const reduced = useReducedMotion();
@@ -93,7 +63,8 @@ export default function Works() {
   // 'start end' → 'end start' tracks full section journey through viewport
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
 
-  const SP = { stiffness: 70, damping: 22, mass: 1.4 };
+  // Light air-suspension spring: Lenis already smooths scroll, so keep mass light for responsive glide
+  const SP = { stiffness: 165, damping: 26, mass: 0.45 };
 
   /* horizontal pan — fills most of the scroll window */
   const rawX = useTransform(scrollYProgress, [0, 0.28, 0.82], [0, 0, -380]);
@@ -118,6 +89,45 @@ export default function Works() {
 
   const vineY = useTransform(scrollYProgress, [0.75, 1], [50, -150]);
 
+  // Single coordinator computes which desktop cards are near viewport instead of 12 per-card listeners
+  const [activeMask, setActiveMask] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(true);
+  const prevMaskRef = useRef(0);
+
+  const evaluateVisibleCards = () => {
+    if (typeof window === "undefined" || window.innerWidth <= 900 || reduced) {
+      setIsDesktop(false);
+      return;
+    }
+    setIsDesktop(true);
+    const p = scrollYProgress.get();
+    const trackX = panX.get();
+    let mask = 0;
+    if (p >= 0.08 && p <= 0.92) {
+      for (let i = 0; i < CARD_BOUNDS.length; i++) {
+        const screenLeft = CARD_BOUNDS[i].left + trackX;
+        const screenRight = screenLeft + CARD_BOUNDS[i].width;
+        if (screenRight > -35 && screenLeft < 145) {
+          mask |= 1 << i;
+        }
+      }
+    }
+    if (mask !== prevMaskRef.current) {
+      prevMaskRef.current = mask;
+      setActiveMask(mask);
+    }
+  };
+
+  useEffect(() => {
+    evaluateVisibleCards();
+    window.addEventListener("resize", evaluateVisibleCards, { passive: true });
+    return () => window.removeEventListener("resize", evaluateVisibleCards);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [reduced]);
+
+  useMotionValueEvent(scrollYProgress, "change", evaluateVisibleCards);
+  useMotionValueEvent(panX, "change", evaluateVisibleCards);
+
   return (
     <section ref={ref} id="work" className={styles.scrollSection}>
       <motion.div className={styles.stickyContainer} style={reduced ? {} : { y: containerY }}>
@@ -129,7 +139,7 @@ export default function Works() {
           aria-hidden="true"
         >
           <Image
-            src="/forest 3_nobg.png 11-36-35-396.png"
+            src="/forest-3.webp"
             alt=""
             aria-hidden="true"
             fill
@@ -160,8 +170,15 @@ export default function Works() {
 
         {/* panning track on desktop */}
         <motion.div className={styles.track} style={{ x: reduced ? 0 : x }}>
-          {works.map(w => (
-            <ProjectCard key={w.num} work={w} scrollYProgress={scrollYProgress} panX={panX} reduced={reduced} />
+          {works.map((w, idx) => (
+            <ProjectCard
+              key={w.num}
+              work={w}
+              index={idx}
+              scrollYProgress={scrollYProgress}
+              videoActive={isDesktop ? Boolean(activeMask & (1 << idx)) : undefined}
+              reduced={reduced}
+            />
           ))}
 
           <motion.div
@@ -170,7 +187,7 @@ export default function Works() {
             aria-hidden="true"
           >
             <Image
-              src="/vine_nobg.png"
+              src="/vine_nobg.webp"
               alt=""
               aria-hidden="true"
               width={1024}

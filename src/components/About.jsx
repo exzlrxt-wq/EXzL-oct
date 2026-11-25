@@ -37,7 +37,7 @@ export default function About() {
         >
           <motion.div style={{ y: imgY }} className={styles.frame}>
             <Image
-              src="/exzlr-logo-main.png"
+              src="/exzlr-logo-main.webp"
               alt="EXZLR Logo"
               fill
               sizes="(max-width: 1000px) 400px, 440px"

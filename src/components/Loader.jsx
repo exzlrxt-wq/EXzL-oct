@@ -53,7 +53,7 @@ export default function Loader() {
 
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d", { alpha: true });
+    const ctx = canvas.getContext("2d", { alpha: false });
 
     const W = window.innerWidth;
     const H = window.innerHeight;
@@ -62,7 +62,7 @@ export default function Loader() {
 
     canvas.width  = W * dpr;
     canvas.height = H * dpr;
-    ctx.scale(dpr, dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     const run = async () => {
       const serifFont = getComputedStyle(document.documentElement).getPropertyValue("--font-cormorant").trim() || "'Cormorant Garamond', serif";
@@ -109,48 +109,77 @@ export default function Loader() {
               speed:     isMobile ? 0.024 + Math.random() * 0.02 : 0.014 + Math.random() * 0.014,
               progress:  0,
               delay:     Math.random() * (isMobile ? 18 : 40),
-              glyph:     GLYPHS[Math.floor(Math.random() * GLYPHS.length)],
+              glyphIdx:  Math.floor(Math.random() * GLYPHS.length),
               isZ:       x > W * 0.42 && x < W * 0.58,
             });
           }
         }
       }
 
+      // Pre-render each glyph once per color onto tiny offscreen sprites so draw() uses fast drawImage blits instead of per-frame fillText
+      const glyphPx = isMobile ? 8 : 9;
+      const spriteBox = 16;
+      const spriteHalf = spriteBox / 2;
+      const palette = [
+        "rgba(96, 117, 84, 0.55)",  // 0: swirling moss
+        "rgba(95, 138, 107, 0.95)", // 1: settled Z accent
+        "rgba(240, 237, 230, 0.95)",// 2: settled ivory
+      ];
+      const sprites = palette.map((color) =>
+        GLYPHS.map((g) => {
+          const sc = document.createElement("canvas");
+          sc.width = spriteBox * dpr;
+          sc.height = spriteBox * dpr;
+          const sctx = sc.getContext("2d");
+          sctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          sctx.font = `${glyphPx}px ${serifFont}`;
+          sctx.textAlign = "center";
+          sctx.textBaseline = "middle";
+          sctx.fillStyle = color;
+          sctx.fillText(g, spriteHalf, spriteHalf);
+          return sc;
+        })
+      );
+
       let frame = 0;
 
       const draw = () => {
         if (!particlesInit.current) return;
-        ctx.clearRect(0, 0, W, H);
-        
-        ctx.fillStyle = "rgba(11, 10, 9, 0.45)";
+        ctx.fillStyle = "#0b0a09";
         ctx.fillRect(0, 0, W, H);
 
-        ctx.font          = isMobile ? `8px ${serifFont}` : `9px ${serifFont}`;
-        ctx.textAlign     = "center";
-        ctx.textBaseline  = "middle";
+        const cx = W / 2;
+        const cy = H / 2;
 
-        for (const p of particles) {
+        for (let k = 0; k < particles.length; k++) {
+          const p = particles[k];
           if (frame > p.delay) {
             p.progress += p.speed;
             if (p.progress > 1) p.progress = 1;
           }
-          const ease          = 1 - Math.pow(1 - p.progress, 3);
+          const inv           = 1 - p.progress;
+          const ease          = 1 - inv * inv * inv;
           p.angle            += p.spinSpeed * (1 - ease * 0.8);
           const currentRadius = p.radius * (1 - ease);
-          const swirlX        = W / 2 + Math.cos(p.angle) * currentRadius;
-          const swirlY        = H / 2 + Math.sin(p.angle) * currentRadius;
-          const currentX      = swirlX * (1 - ease) + p.tx * ease;
-          const currentY      = swirlY * (1 - ease) + p.ty * ease;
+          const swirlX        = cx + Math.cos(p.angle) * currentRadius;
+          const swirlY        = cy + Math.sin(p.angle) * currentRadius;
+          let currentX        = swirlX * (1 - ease) + p.tx * ease;
+          let currentY        = swirlY * (1 - ease) + p.ty * ease;
 
+          let colorIdx = 0;
           if (ease === 1) {
-            ctx.fillStyle = p.isZ
-              ? "rgba(95, 138, 107, 0.95)"
-              : "rgba(240, 237, 230, 0.95)";
-            ctx.fillText(p.glyph, currentX + Math.sin(frame * 0.05 + p.tx) * 0.5, currentY + Math.cos(frame * 0.05 + p.ty) * 0.5);
-          } else {
-            ctx.fillStyle = "rgba(96, 117, 84, 0.55)";
-            ctx.fillText(p.glyph, currentX, currentY);
+            colorIdx = p.isZ ? 1 : 2;
+            currentX += Math.sin(frame * 0.05 + p.tx) * 0.5;
+            currentY += Math.cos(frame * 0.05 + p.ty) * 0.5;
           }
+
+          ctx.drawImage(
+            sprites[colorIdx][p.glyphIdx],
+            currentX - spriteHalf,
+            currentY - spriteHalf,
+            spriteBox,
+            spriteBox
+          );
         }
         frame++;
         rafRef.current = requestAnimationFrame(draw);

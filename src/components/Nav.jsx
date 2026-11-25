@@ -35,9 +35,24 @@ const menuItems = [
   { label: "About",      href: "#about",   num: "04" },
 ];
 
+function IstClock({ className }) {
+  const [time, setTime] = useState("");
+
+  useEffect(() => {
+    const tick = () => {
+      const n = new Date();
+      setTime([n.getHours(), n.getMinutes(), n.getSeconds()].map((v) => String(v).padStart(2, "0")).join(":") + " IST");
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  return <span className={className}>{time}</span>;
+}
+
 export default function Nav() {
   const [menuOpen,   setMenuOpen]   = useState(false);
-  const [time,       setTime]       = useState("");
   const [hoveredIdx, setHoveredIdx] = useState(-1);
   const lenis = useLenis();
   const router = useRouter();
@@ -47,17 +62,6 @@ export default function Nav() {
     if (typeof window !== "undefined") {
       setHasPlayed(sessionStorage.getItem("exzlr_loader_played") === "true");
     }
-  }, []);
-
-  // Live clock
-  useEffect(() => {
-    const tick = () => {
-      const n = new Date();
-      setTime([n.getHours(), n.getMinutes(), n.getSeconds()].map((v) => String(v).padStart(2, "0")).join(":") + " IST");
-    };
-    tick();
-    const id = setInterval(tick, 1000);
-    return () => clearInterval(id);
   }, []);
 
   const openMenu = () => {
@@ -148,8 +152,8 @@ export default function Nav() {
 
         <div className={styles.fmFoot}>
           <div style={{ display: "flex", gap: "24px" }}>
-            <a href={"#contact"} className={styles.fmEmail}>Contact Us</a>
-            <a href={"#contact"} className={styles.fmEmail}>Book a Call</a>
+            <a href="#contact" onClick={(e) => handleNav(e, "#contact")} className={styles.fmEmail}>Contact Us</a>
+            <a href="#contact" onClick={(e) => handleNav(e, "#contact")} className={styles.fmEmail}>Book a Call</a>
           </div>
           <a href="mailto:admin@exzlr.com" className={styles.fmEmail}>admin@exzlr.com</a>
           <div className={styles.fmStatus}>Global</div>
@@ -172,7 +176,7 @@ export default function Nav() {
         <div className={styles.nRight}>
           <a href={"#contact"} className={styles.navLink}>Contact Us</a>
           <a href={"#contact"} className={styles.navLink}>Book a Call</a>
-          <span className={styles.clock}>{time}</span>
+          <IstClock className={styles.clock} />
           <button
             className={`${styles.trigger} ${menuOpen ? styles.triggerOpen : ""} nav-trigger`}
             onClick={() => menuOpen ? closeMenu() : openMenu()}

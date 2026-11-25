@@ -7,6 +7,8 @@
   grid-template-columns: 1fr 400px;
   gap: 8vw;
   align-items: start;
+  content-visibility: auto;
+  contain-intrinsic-size: auto none auto 820px;
 }
 
 .stencil {
@@ -231,6 +233,27 @@
     width: 38px;
     height: 38px;
   }
+}
+
+@media (max-width: 600px) {
+  .section {
+    padding: 72px 16px;
+  }
+  .title {
+    font-size: clamp(36px, 9vw, 60px);
+  }
+  .chatOuter {
+    height: 400px;
+  }
+  .email {
+    font-size: clamp(18px, 5vw, 28px);
+  }
+  .stencil { display: none; }
+}
+
+@media (max-width: 400px) {
+  .section { padding: 60px 14px; }
+  .chatOuter { height: 360px; }
 }
 
 /* Botanical Layer */

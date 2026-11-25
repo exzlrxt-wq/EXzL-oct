@@ -1,25 +1,25 @@
 "use client";
-import { useRef } from "react";
-import { motion, useInView, useScroll, useTransform, useSpring } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "framer-motion";
 import SmartVideo from "./SmartVideo";
 import styles from "./ConsultingProjects.module.css";
 
-// Parallax wrapper for vertical scroll
-function ParallaxCard({ children, speed = 50, className = "" }) {
+// Parallax wrapper for vertical scroll (disabled on mobile <=768px and reduced motion to prevent card overlap)
+function ParallaxCard({ children, speed = 50, className = "", disableParallax = false, reduced = false }) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  
-  // As user scrolls, the card drifts slightly
+
+  // As user scrolls, the card drifts directly on Lenis's smooth scroll with a light suspension spring
   const rawY = useTransform(scrollYProgress, [0, 1], [speed, -speed]);
-  const driftY = useSpring(rawY, { stiffness: 50, damping: 20 });
+  const driftY = useSpring(rawY, { stiffness: 160, damping: 26, mass: 0.45 });
 
   return (
-    <motion.div ref={ref} style={{ y: driftY }} className={className}>
+    <motion.div ref={ref} style={disableParallax ? undefined : { y: driftY }} className={className}>
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
+        initial={reduced ? false : { opacity: 0, y: 32 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.75, ease: "easeOut" }}
       >
         {children}
       </motion.div>
@@ -28,6 +28,18 @@ function ParallaxCard({ children, speed = 50, className = "" }) {
 }
 
 export default function ConsultingProjects() {
+  const reduced = useReducedMotion();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 768px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  const disableParallax = Boolean(reduced || isMobile);
   return (
     <section id="projects" className={styles.section}>
       <div className={styles.container}>
@@ -39,7 +51,7 @@ export default function ConsultingProjects() {
 
           <div className={styles.content}>
             {/* FLAGSHIP */}
-            <ParallaxCard speed={50}>
+            <ParallaxCard speed={50} disableParallax={disableParallax} reduced={Boolean(reduced)}>
               <div className={styles.flagship}>
                 <div className={styles.flagshipTop} />
                 <div className={styles.flagshipBody}>
@@ -63,7 +75,7 @@ export default function ConsultingProjects() {
 
             {/* VIDEO PROJECTS — full cards */}
             <div className={styles.proofPair}>
-              <ParallaxCard speed={80}>
+              <ParallaxCard speed={80} disableParallax={disableParallax} reduced={Boolean(reduced)}>
                 <div className={styles.proofCard}>
                   <div className={styles.proofCardCat}>Music Technology</div>
                   <div className={styles.proofCardName}>Artiso</div>
@@ -75,7 +87,7 @@ export default function ConsultingProjects() {
                   </div>
                 </div>
               </ParallaxCard>
-              <ParallaxCard speed={120}>
+              <ParallaxCard speed={120} disableParallax={disableParallax} reduced={Boolean(reduced)}>
                 <div className={styles.proofCard}>
                   <div className={styles.proofCardCat}>Wellness / Spiritual</div>
                   <div className={styles.proofCardName}>MindGarden</div>
@@ -90,7 +102,7 @@ export default function ConsultingProjects() {
             </div>
 
             <div className={styles.proofPair}>
-              <ParallaxCard speed={80}>
+              <ParallaxCard speed={80} disableParallax={disableParallax} reduced={Boolean(reduced)}>
                 <div className={styles.proofCard}>
                   <div className={styles.proofCardCat}>Lead Automation</div>
                   <div className={styles.proofCardName}>LeadFlow</div>
@@ -102,7 +114,7 @@ export default function ConsultingProjects() {
                   </div>
                 </div>
               </ParallaxCard>
-              <ParallaxCard speed={120}>
+              <ParallaxCard speed={120} disableParallax={disableParallax} reduced={Boolean(reduced)}>
                 <div className={styles.proofCard}>
                   <div className={styles.proofCardCat}>EdTech · Web Platform</div>
                   <div className={styles.proofCardName}>Kala Tutorium</div>
@@ -117,7 +129,7 @@ export default function ConsultingProjects() {
             </div>
 
             <div className={styles.proofPair}>
-              <ParallaxCard speed={80}>
+              <ParallaxCard speed={80} disableParallax={disableParallax} reduced={Boolean(reduced)}>
                 <div className={styles.proofCard}>
                   <div className={styles.proofCardCat}>Sustainability Tech</div>
                   <div className={styles.proofCardName}>Carbon Green</div>
@@ -132,7 +144,7 @@ export default function ConsultingProjects() {
             </div>
 
             {/* RECTANGULAR APPS GRID */}
-            <ParallaxCard speed={40}>
+            <ParallaxCard speed={40} disableParallax={disableParallax} reduced={Boolean(reduced)}>
               <div className={styles.nameTileGrid}>
                 {[
                   { cat: 'Freelancer SaaS',    name: 'ClientShelf',  desc: 'Proposals, contracts, invoices with AI scope guard and Stripe billing.' },
@@ -151,7 +163,7 @@ export default function ConsultingProjects() {
             </ParallaxCard>
 
             {/* OTHER BUILDS */}
-            <ParallaxCard speed={50}>
+            <ParallaxCard speed={50} disableParallax={disableParallax} reduced={Boolean(reduced)}>
               <div className={styles.otherBuildsTitle}>Other Builds</div>
               <div className={styles.buildList}>
                 <span className={styles.buildTag}>Academy / Kalatutorium</span>

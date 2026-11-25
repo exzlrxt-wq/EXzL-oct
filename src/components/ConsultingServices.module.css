@@ -187,8 +187,24 @@
 }
 
 @media (max-width: 768px) {
-  .section { padding: 100px 24px; }
+  .section { padding: 100px 24px; min-height: auto; }
   .tier { grid-template-columns: 1fr; }
   .tierMeta { text-align: left; }
   .auditHook { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 600px) {
+  .section { padding: 72px 18px; }
+  .sectionTitle { font-size: clamp(36px, 9vw, 60px); }
+  .tier { padding: 24px 20px; }
+  .auditHook { padding: 20px; }
+  .automationMenu { margin-top: 60px; }
+  .menuHeader { margin-bottom: 36px; }
+  .stencil { display: none; }
+}
+
+@media (max-width: 400px) {
+  .section { padding: 60px 16px; }
+  .tier { padding: 20px 16px; }
+  .automationMenu { margin-top: 40px; }
 }

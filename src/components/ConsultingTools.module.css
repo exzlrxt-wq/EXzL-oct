@@ -169,3 +169,11 @@
   letter-spacing: 0.14em;
   color: #282828;
 }
+
+@media (max-width: 600px) {
+  .section { margin-bottom: 60px; }
+  .header { padding: 0 18px; margin-bottom: 32px; }
+  .chip { padding: 16px 20px; min-width: 80px; }
+  .note { padding: 0 18px; }
+  .fade { width: 60px; }
+}

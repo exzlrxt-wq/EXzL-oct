@@ -4,6 +4,8 @@
   position: relative;
   padding: clamp(6rem, 12vw, 10rem) var(--page-px);
   overflow: hidden;
+  content-visibility: auto;
+  contain-intrinsic-size: auto none auto 900px;
 }
 
 /* ── Stencil ─────────────────────────────────────────────────── */
@@ -69,6 +71,16 @@
   .grid {
     grid-template-columns: 1fr;
   }
+  .section { padding: 72px 18px; }
+  .stencil { display: none; }
+  .body { margin-top: 1rem; font-size: clamp(13px, 3.5vw, 16px); }
+  .heading { font-size: clamp(30px, 9vw, 50px); }
+  .card { padding: 1.5rem 1.25rem; }
+}
+
+@media (max-width: 400px) {
+  .section { padding: 60px 16px; }
+  .cta { gap: 0.5rem; }
 }
 
 /* ── Technical Card ──────────────────────────────────────────── */
@@ -78,8 +90,6 @@
   border-radius: 2px;
   background: var(--bg2);
   border: 1px solid var(--border-glossy);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
               border-color 0.35s ease,
               box-shadow 0.35s ease;

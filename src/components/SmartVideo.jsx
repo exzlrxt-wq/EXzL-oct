@@ -7,13 +7,14 @@ import { useEffect, useRef, useState } from "react";
  * videos concurrently on initial page load while still pre-buffering ahead of entry.
  * Once loaded, it preserves its buffer and simply pauses when off-screen.
  */
-export default function SmartVideo({ src, className, active }) {
+export default function SmartVideo({ src, poster, className, active }) {
   const videoRef = useRef(null);
   const [ioActive, setIoActive] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
 
   const useIo = active === undefined;
   const isActive = useIo ? ioActive : active;
+  const resolvedPoster = poster || (src && src.endsWith(".mp4") ? src.replace(/\.mp4$/, ".webp") : undefined);
 
   useEffect(() => {
     if (!useIo) return;
@@ -25,7 +26,7 @@ export default function SmartVideo({ src, className, active }) {
 
     const io = new IntersectionObserver(
       ([entry]) => setIoActive(entry.isIntersecting),
-      { rootMargin: "600px 600px" }
+      { rootMargin: "450px 450px" }
     );
     io.observe(el);
     return () => io.disconnect();
@@ -52,11 +53,12 @@ export default function SmartVideo({ src, className, active }) {
     <video
       ref={videoRef}
       src={shouldAttachSrc ? src : undefined}
+      poster={resolvedPoster}
       className={className}
       muted
       loop
       playsInline
-      preload={shouldAttachSrc ? "auto" : "none"}
+      preload={isActive ? "auto" : shouldAttachSrc ? "metadata" : "none"}
     />
   );
 }

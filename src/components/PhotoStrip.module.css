@@ -66,5 +66,22 @@
 }
 
 @media (max-width: 600px) {
-  .wrap { height: 200px; }
+  /* Stack photos vertically on very small screens to avoid crushed columns */
+  .wrap {
+    height: auto;
+    flex-direction: column;
+  }
+  .ph {
+    flex: none;
+    height: 200px;
+    border-right: none;
+    border-bottom: 1px solid rgba(0,0,0,.5);
+  }
+  .ph:last-child {
+    border-bottom: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .ph { height: 160px; }
 }

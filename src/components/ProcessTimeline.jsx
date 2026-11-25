@@ -67,9 +67,9 @@ export default function ProcessTimeline() {
     offset: ["start end", "start 0.3"],
   });
 
-  // Raw X: +120px → 0 over the entrance window, spring-smoothed
+  // Raw X: +120px → 0 over the entrance window, light air-suspension settle (Lenis already smooths scroll)
   const rawEntranceX = useTransform(entranceP, [0, 1], [120, 0]);
-  const entranceX    = useSpring(rawEntranceX, { stiffness: 100, damping: 22, mass: 0.7 });
+  const entranceX    = useSpring(rawEntranceX, { stiffness: 180, damping: 28, mass: 0.45 });
 
   return (
     <section ref={ref} id="process" className={styles.section} style={{ position: "relative" }}>
@@ -103,7 +103,7 @@ export default function ProcessTimeline() {
       {/* Book-match PNG — normal orientation, solid at top (seam), fades into Process */}
       <div className={styles.forestTopMask} style={{ position: "absolute" }}>
         <Image
-          src="/forest top_nobg.png"
+          src="/forest-top.webp"
           alt=""
           aria-hidden="true"
           fill

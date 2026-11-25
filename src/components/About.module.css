@@ -3,6 +3,8 @@
   padding: 140px 56px;
   position: relative;
   overflow: hidden;
+  content-visibility: auto;
+  contain-intrinsic-size: auto none auto 780px;
 }
 
 .stencil {
@@ -130,6 +132,14 @@
   .imgWrap { max-width: 100%; }
   .deco { display: none; }
   .badge { left: 0; bottom: 16px; font-size: 6px; }
+  .section { padding: 72px 18px; }
+  .stencil { display: none; }
+  .heading { font-size: clamp(30px, 9vw, 48px); }
+}
+
+@media (max-width: 400px) {
+  .section { padding: 60px 16px; }
+  .heading { font-size: clamp(28px, 10vw, 40px); }
 }
 
 /* Botanical layers */

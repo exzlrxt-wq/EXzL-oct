@@ -74,7 +74,7 @@ export default function Contact() {
   return (
     <section id="contact" className={styles.section} style={{ position: "relative" }}>
       {/* Botanical layer moved from Process */}
-      <Image src="/palm_nobg.png" alt="" aria-hidden="true" width={1024} height={1024} sizes="35vw" className={styles.botPalm} loading="lazy" />
+      <Image src="/palm_nobg.webp" alt="" aria-hidden="true" width={1024} height={1024} sizes="35vw" className={styles.botPalm} loading="lazy" />
 
       <motion.div
         className={styles.header}

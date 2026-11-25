@@ -108,6 +108,8 @@ export default function ComingSoon() {
         <video
           className="cs-video"
           src="/node-graph-preview.mp4"
+          poster="/node-graph-preview.webp"
+          preload="metadata"
           autoPlay loop muted playsInline
         />
         <div className="cs-vignette" />

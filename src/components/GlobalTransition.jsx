@@ -44,11 +44,11 @@ export default function GlobalTransition() {
         return;
       }
 
-      // Check if it's pointing to the exact same page we're already on
+      // Same-page links (including /#contact while already on /) are handled by SmoothScrolling without a full-screen fade
       try {
         const url = new URL(target.href);
-        if (url.pathname === pathname && url.hash === "") {
-          return; // It's just a link to the current page
+        if (url.origin === window.location.origin && url.pathname === pathname) {
+          return;
         }
       } catch (err) {
         console.warn("[GlobalTransition] Could not parse URL:", err);
@@ -62,7 +62,7 @@ export default function GlobalTransition() {
         try {
           const url = new URL(target.href);
           if (url.origin === window.location.origin) {
-            router.push(href);
+            router.push(url.pathname + url.search + url.hash);
           } else {
             window.location.href = href;
           }

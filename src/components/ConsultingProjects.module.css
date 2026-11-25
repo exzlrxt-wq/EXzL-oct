@@ -301,14 +301,25 @@
   }
   .rowLabel {
     flex: none;
+    position: static !important;
   }
 }
 
 @media (max-width: 600px) {
+  .section { padding: 72px 18px; min-height: auto; }
   .proofPair {
     grid-template-columns: 1fr;
   }
   .flagshipBody {
     padding: 24px;
   }
+  .flagshipName { font-size: 22px; }
+  .rowLabel { font-size: 24px; }
+}
+
+@media (max-width: 480px) {
+  .section { padding: 60px 16px; }
+  .flagshipBody { padding: 20px 16px; }
+  .proofCard { padding: 20px; }
+  .nameTileGrid { grid-template-columns: 1fr; }
 }

@@ -1,6 +1,20 @@
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const monorepoRoot = path.resolve(__dirname, "../..");
+// Only point Turbopack at the monorepo root locally when next is hoisted there;
+// standalone Vercel builds (exzlrxt-wq/EXzL-oct) install next inside this directory.
+const isMonorepoHoisted =
+  fs.existsSync(path.join(monorepoRoot, "turbo.json")) &&
+  fs.existsSync(path.join(monorepoRoot, "node_modules/next/package.json")) &&
+  !fs.existsSync(path.join(__dirname, "node_modules/next/package.json"));
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "standalone",
+  ...(isMonorepoHoisted ? { turbopack: { root: monorepoRoot } } : {}),
   images: {
     remotePatterns: [],
   },

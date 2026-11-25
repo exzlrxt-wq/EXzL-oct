@@ -70,6 +70,22 @@
   .section { padding: 100px 6vw; }
 }
 
+@media (max-width: 600px) {
+  .section { padding: 72px 18px; }
+  .pill { margin-bottom: 48px; font-size: 7px; padding: 8px 16px; }
+  .quote { font-size: clamp(30px, 10vw, 52px); line-height: 1.1; }
+  .sig { margin-top: 48px; padding-top: 24px; font-size: 9px; }
+  .stencil { display: none; }
+  .botBamboo { display: none; }
+  .botBanana { display: none; }
+}
+
+@media (max-width: 400px) {
+  .section { padding: 60px 16px; }
+  .pill { margin-bottom: 36px; }
+  .quote { font-size: clamp(28px, 11vw, 44px); }
+}
+
 /* Botanical layers */
 .botBamboo {
   position: absolute;

@@ -193,3 +193,11 @@
   .forestBg { display: none !important; }
   .desktopVine { display: none !important; }
 }
+
+@media (max-width: 600px) {
+  .track { gap: 28px !important; padding: 28px 16px 60px !important; }
+  .ambientLabel { padding: 28px 16px 0 !important; }
+  .introTitle { font-size: clamp(40px, 12vw, 72px) !important; margin-bottom: 12px !important; }
+  .introHint { font-size: 9px !important; }
+  .lTitle { font-size: clamp(14px, 4vw, 22px) !important; }
+}

@@ -52,7 +52,7 @@ export default function ConsultingServices() {
   return (
     <section className={styles.section} id="services" style={{ paddingTop: "80px" }}>
       {/* Background Leaves */}
-      <Image src="/palm_nobg.png" alt="" width={1024} height={1024} sizes="400px" className={styles.botPalm} style={{ opacity: 0.05, height: 'auto' }} loading="lazy" />
+      <Image src="/palm_nobg.webp" alt="" width={1024} height={1024} sizes="400px" className={styles.botPalm} style={{ opacity: 0.05, height: 'auto' }} loading="lazy" />
 
       <div className={styles.row}>
         <div className={styles.rowLabel}>Services</div>

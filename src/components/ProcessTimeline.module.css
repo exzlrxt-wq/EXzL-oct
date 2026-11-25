@@ -5,6 +5,7 @@
   position: relative;
   overflow: hidden;
   content-visibility: auto;     /* browser skips paint/layout while off-screen — free perf win */
+  contain-intrinsic-size: auto none auto 760px;
 }
 
 /* Botanical accents */
@@ -125,8 +126,9 @@
 .lineFill {
   height: 100%;
   background: var(--acid);
-  width: 0%;
-  will-change: width;
+  width: 100%;
+  transform-origin: left;
+  will-change: transform;
 }
 
 .stepDesc {
@@ -148,4 +150,10 @@
   .grid { grid-template-columns: 1fr; }
   .step { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 32px; }
   .step:first-child { border-top: none; }
+  .section { padding: 72px 18px; }
+  .header { margin-bottom: 48px; }
+  .stencil { display: none; }
+  .forestTopMask { display: none; }
+  .stepLabel { font-size: clamp(24px, 7vw, 36px); }
+  .title { font-size: clamp(36px, 9vw, 60px); }
 }

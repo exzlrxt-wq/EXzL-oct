@@ -159,6 +159,34 @@
 @media (max-width: 768px) {
   .row { grid-template-columns: 1fr; }
   .rowLabel { margin-bottom: 24px; position: static !important; }
+  .rowLeftFixed { position: static !important; gap: 16px; margin-bottom: 28px; }
+  .rowLeftFixed .rowLabel { margin-bottom: 0; }
+  .pillsContainer { flex-direction: row; flex-wrap: wrap; gap: 8px; }
+  .pill { font-size: 10px; padding: 5px 10px; }
+}
+
+@media (max-width: 600px) {
+  .wrapper {
+    padding: 80px 18px 60px;
+  }
+  .heroClaim { font-size: clamp(28px, 8vw, 44px); letter-spacing: -0.5px; }
+  .heroSub { font-size: 15px; }
+  .closing { padding: 40px 24px; margin-top: 60px; }
+  .closingLine { font-size: clamp(18px, 5vw, 24px); }
+  .ctaRow { flex-direction: column; }
+  .ctaRow > * { width: 100%; text-align: center; }
+  .tier { grid-template-columns: 1fr !important; }
+  .tierPrice { text-align: left; }
+  .tierTime { text-align: left; }
+  .auditHook { flex-direction: column; align-items: flex-start; }
+  .stencil { display: none; }
+  .botPalm { display: none; }
+  .botVine { display: none; }
+}
+
+@media (max-width: 400px) {
+  .wrapper { padding: 70px 16px 48px; }
+  .closing { padding: 32px 18px; }
 }
 .rowLabel {
   font-family: var(--font-d);
@@ -279,18 +307,16 @@
 .closingSub { font-size: 15px; color: var(--text-2); margin-bottom: 36px; }
 
 /* ── LEAVES ── */
-.botPalm { position: absolute; top: 0; right: -10vw; width: clamp(200px, 30vw, 400px); height: auto; opacity: 0.1; mix-blend-mode: screen; pointer-events: none; transform: scaleX(-1) rotate(-15deg); z-index: 0; animation: cScanPalm 7s ease-in-out infinite; }
-.botVine  { position: absolute; left: -20vw; top: 40%; width: clamp(300px, 40vw, 600px); height: auto; opacity: 0.08; mix-blend-mode: screen; pointer-events: none; z-index: 0; animation: cScanVine 7s 1.2s ease-in-out infinite; }
+.botPalm { position: absolute; top: 0; right: -10vw; width: clamp(200px, 30vw, 400px); height: auto; opacity: 0.1; mix-blend-mode: screen; pointer-events: none; transform: scaleX(-1) rotate(-15deg) translateZ(0); filter: sepia(0.4) saturate(1.1) hue-rotate(100deg); z-index: 0; animation: cScanPalm 7s ease-in-out infinite; }
+.botVine  { position: absolute; left: -20vw; top: 40%; width: clamp(300px, 40vw, 600px); height: auto; opacity: 0.08; mix-blend-mode: screen; pointer-events: none; transform: translateZ(0); filter: sepia(0.4) saturate(1.1) hue-rotate(100deg); z-index: 0; animation: cScanVine 7s 1.2s ease-in-out infinite; }
 
 @keyframes cScanPalm {
-  0%   { filter: blur(1px) sepia(0.6) saturate(0) hue-rotate(100deg);                 opacity: 0.10; }
-  8%   { filter: blur(1px) sepia(0.6) saturate(1.5) hue-rotate(100deg) brightness(1.1); opacity: 0.15; }
-  22%  { filter: blur(1px) sepia(0.2) saturate(0.8) hue-rotate(100deg);               opacity: 0.11; }
-  100% { filter: blur(1px) sepia(0.2) saturate(0) hue-rotate(100deg);                 opacity: 0.10; }
+  0%, 100% { opacity: 0.10; }
+  8%       { opacity: 0.15; }
+  22%      { opacity: 0.11; }
 }
 @keyframes cScanVine {
-  0%   { filter: blur(1px) sepia(0.6) saturate(0) hue-rotate(100deg);                 opacity: 0.08; }
-  8%   { filter: blur(1px) sepia(0.6) saturate(1.5) hue-rotate(100deg) brightness(1.1); opacity: 0.12; }
-  22%  { filter: blur(1px) sepia(0.2) saturate(0.8) hue-rotate(100deg);               opacity: 0.09; }
-  100% { filter: blur(1px) sepia(0.2) saturate(0) hue-rotate(100deg);                 opacity: 0.08; }
+  0%, 100% { opacity: 0.08; }
+  8%       { opacity: 0.12; }
+  22%      { opacity: 0.09; }
 }

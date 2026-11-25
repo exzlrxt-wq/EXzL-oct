@@ -75,23 +75,21 @@ export default function StatementSection() {
     offset: ["start 0.6", "end start"],  /* start tracking while section still entering — iris opens sooner */
   });
 
-  // N animation triggers after text has settled
+  // N animation triggers only while text is settled and section is still active
   useMotionValueEvent(scrollYProgress, "change", (p) => {
-    if (p >= 0.38 && !nActive) setNActive(true);
-    if (p <  0.32 && nActive)  setNActive(false);
+    const active = p >= 0.38 && p <= 0.92;
+    if (active !== nActive) setNActive(active);
   });
 
-  // ── "Signal." from LEFT ──
+  // ── "Signal." from LEFT (light air-suspension spring — Lenis already smooths scroll) ──
   const rawSigX = useTransform(scrollYProgress, [0.06, 0.22], [-1100, 0]);
   const rawSigR = useTransform(scrollYProgress, [0.06, 0.22], [-5, 0]);
-  const sigXspg = useSpring(rawSigX, { stiffness: 40, damping: 18, mass: 1.4 });
-  // rotation uses raw transform (spring on X already covers smoothing)
+  const sigXspg = useSpring(rawSigX, { stiffness: 150, damping: 26, mass: 0.5 });
 
   // ── "No Noise." from RIGHT ──
   const rawNnX = useTransform(scrollYProgress, [0.06, 0.22], [1100, 0]);
   const rawNnR = useTransform(scrollYProgress, [0.06, 0.22], [5, 0]);
-  const nnXspg = useSpring(rawNnX, { stiffness: 36, damping: 18, mass: 1.6 });
-  // rotation uses raw transform
+  const nnXspg = useSpring(rawNnX, { stiffness: 140, damping: 26, mass: 0.5 });
 
   // ── Parallax drift once settled ──
   const sigParY = useTransform(scrollYProgress, [0.24, 0.65], [0, -24]);
@@ -114,9 +112,9 @@ export default function StatementSection() {
   const markR    = useTransform(scrollYProgress, [0, 1], [0, 30]);
   const markOp   = useTransform(scrollYProgress, [0.10, 0.24], [0, 0.042]);
 
-  // ── Content lift + spring handoff to next section ──
+  // ── Content lift + light suspension handoff to next section ──
   const rawContentY = useTransform(scrollYProgress, [0.72, 1.0], [0, -120]);
-  const contentY = useSpring(rawContentY, { stiffness: 80, damping: 25, mass: 1.2 });
+  const contentY = useSpring(rawContentY, { stiffness: 170, damping: 28, mass: 0.45 });
 
   // ── Forest PNG — direct transform, no spring (Lenis smooths it already) ──
   const forestBottomOp = useTransform(scrollYProgress, [0.35, 0.55], [0, 0.14]);
@@ -129,17 +127,17 @@ export default function StatementSection() {
 
           {/* ── Ambient signal mark ── */}
           <motion.div className={styles.mark} style={reduced ? {} : { opacity: markOp, rotate: markR }} aria-hidden="true">
-            <Image src="/signal_mark_nobg.png" alt="" width={1024} height={1024} sizes="52vw" style={{ width: "100%", height: "auto", display: "block" }} loading="lazy" />
+            <Image src="/signal_mark_nobg.webp" alt="" width={1024} height={1024} sizes="52vw" style={{ width: "100%", height: "auto", display: "block" }} loading="lazy" />
           </motion.div>
 
           {/* ── Monstera: bottom-left ── */}
           <motion.div className={styles.monstera} style={reduced ? {} : { y: monParY }} aria-hidden="true">
-            <Image src="/monstera_nobg.png" alt="" width={1024} height={819} sizes="38vw" style={{ width: "100%", height: "auto", display: "block" }} loading="lazy" />
+            <Image src="/monstera_nobg.webp" alt="" width={1024} height={819} sizes="38vw" style={{ width: "100%", height: "auto", display: "block" }} loading="lazy" />
           </motion.div>
 
           {/* ── Fern: top-right ── */}
           <motion.div className={styles.fern} style={reduced ? {} : { y: fernParY }} aria-hidden="true">
-            <Image src="/fern_nobg.png" alt="" width={1024} height={1024} sizes="28vw" style={{ width: "100%", height: "auto", display: "block" }} loading="lazy" />
+            <Image src="/fern_nobg.webp" alt="" width={1024} height={1024} sizes="28vw" style={{ width: "100%", height: "auto", display: "block" }} loading="lazy" />
           </motion.div>
 
           {/* Main content — scroll-driven y lift only, no conflicting whileInView */}
@@ -154,8 +152,8 @@ export default function StatementSection() {
                 style={reduced ? {} : { x: nnXspg, rotate: rawNnR, y: nnParY }}>
                 <span style={{ opacity: 0 }}>N</span>o{" "}
                 <AnimatedN active={nActive} />
-                <motion.span style={{ display: "inline-block" }}
-                  animate={nActive ? { letterSpacing: ["-0.03em","0.06em","-0.03em"] } : { letterSpacing: "-0.03em" }}
+                <motion.span style={{ display: "inline-block", transformOrigin: "left center", willChange: "transform" }}
+                  animate={nActive ? { scaleX: [1, 1.055, 1] } : { scaleX: 1 }}
                   transition={nActive ? { duration: 4, ease: "easeInOut", repeat: Infinity } : { duration: 0.3 }}>
                   oise.
                 </motion.span>
@@ -204,7 +202,7 @@ export default function StatementSection() {
             style={reduced ? {} : { opacity: forestBottomOp, position: "absolute" }}
           >
             <Image
-              src="/forest top_nobg.png"
+              src="/forest-top.webp"
               alt=""
               aria-hidden="true"
               fill

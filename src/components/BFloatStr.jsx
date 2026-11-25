@@ -1,12 +1,19 @@
 "use client";
 
+import { useRef } from "react";
+import { useInView } from "framer-motion";
+
 /**
  * Renders text with a per-character vertical float animation.
- * @param {{ text: string, delay?: number }} props
+ * Automatically pauses CSS animations while off-screen so GPU isn't animating hidden chars.
+ * @param {{ text: string, delay?: number, useGradient?: boolean }} props
  */
 export default function BFloatStr({ text, delay = 0, useGradient = false }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { amount: 0.05 });
+
   return (
-    <span style={{ display: "inline-block" }}>
+    <span ref={ref} className={inView ? undefined : "bfloat-paused"} style={{ display: "inline-block" }}>
       {text.split("").map((c, i) => {
         const gradStyles = useGradient ? {
           background: "linear-gradient(135deg, var(--ink) 0%, var(--olive-light) 30%, var(--acid) 65%, var(--moss) 100%)",

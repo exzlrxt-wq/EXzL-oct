@@ -370,3 +370,52 @@
   .monstera { width: clamp(180px, 50vw, 320px); }
   .fern { width: clamp(140px, 35vw, 260px); }
 }
+
+@media (max-width: 600px) {
+  /* Collapse sticky scroll into normal flow — prevents the 260vh trap on mobile */
+  .section {
+    height: auto !important;
+  }
+  .stickyWrap {
+    position: relative !important;
+    height: auto !important;
+  }
+  .sticky {
+    height: auto !important;
+    min-height: 100svh;
+    padding: 80px 18px;
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
+  }
+  .sticky::before { display: none; }
+  .signal, .noNoise {
+    font-size: clamp(44px, 17vw, 80px);
+    white-space: normal;
+  }
+  .collision {
+    gap: 0.08em;
+    justify-content: center;
+  }
+  .lineWrap { width: 90vw; }
+  .tagline {
+    font-size: clamp(13px, 3.5vw, 18px);
+    padding: 0 8px;
+  }
+  .statsRow {
+    gap: 24px;
+    margin-top: 32px;
+  }
+  .stats { gap: 14px; flex-wrap: wrap; justify-content: center; }
+  .statN { font-size: clamp(28px, 8vw, 44px); }
+  .statDiv { height: 32px; }
+  .foot {
+    padding: 0 16px;
+    font-size: 6px;
+  }
+  /* Slat animations cause overflow on mobile — disable */
+  .slatContainer { display: none; }
+  .slatTeaser { display: none; }
+  .teaserTitle { display: none; }
+  .monstera { display: none; }
+  .fern { display: none; }
+}

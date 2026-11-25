@@ -9,6 +9,14 @@
   overflow: hidden;
 }
 
+/* Pause infinite hero animations once scrolled out of view */
+.heroPaused .botPalm,
+.heroPaused .botVine,
+.heroPaused .stencilDesign,
+.heroPaused .title em {
+  animation-play-state: paused;
+}
+
 /* \u2500\u2500 Botanical ambient layers \u2500\u2500 */
 .botPalm {
   position: absolute;
@@ -21,8 +29,8 @@
   pointer-events: none;
   z-index: 0;
   transform: scaleX(-1) rotate(-20deg) translateZ(0);
-  will-change: filter;
-  /* Auto-fires first — right side of hero */
+  filter: sepia(0.4) saturate(1.1) hue-rotate(100deg);
+  /* Animate opacity only so GPU never re-runs CSS filter shaders every frame */
   animation: greenScanPalm 7s ease-in-out infinite;
 }
 
@@ -37,25 +45,22 @@
   pointer-events: none;
   z-index: 0;
   transform: translateZ(0);
-  will-change: filter;
-  /* 1s behind palm — left side of hero, creates right→left sweep */
+  filter: sepia(0.4) saturate(1.1) hue-rotate(100deg);
   animation: greenScanVine 7s 1s ease-in-out infinite;
 }
 
-/* Palm: right side fires first */
+/* Palm: right side fires first (compositor-only opacity pulse) */
 @keyframes greenScanPalm {
-  0%    { filter: blur(0.4px) sepia(0.6) saturate(0) hue-rotate(100deg);                 opacity: 0.08; }
-  8%    { filter: blur(0.4px) sepia(0.6) saturate(1.5) hue-rotate(100deg) brightness(1.1); opacity: 0.13; }
-  22%   { filter: blur(0.4px) sepia(0.2) saturate(0.8) hue-rotate(100deg);               opacity: 0.10; }
-  100%  { filter: blur(0.4px) sepia(0.2) saturate(0) hue-rotate(100deg);                 opacity: 0.08; }
+  0%, 100% { opacity: 0.08; }
+  8%       { opacity: 0.14; }
+  22%      { opacity: 0.10; }
 }
 
 /* Vine: left side follows 1s later */
 @keyframes greenScanVine {
-  0%    { filter: blur(0.3px) sepia(0.6) saturate(0) hue-rotate(100deg);                 opacity: 0.06; }
-  8%    { filter: blur(0.3px) sepia(0.6) saturate(1.5) hue-rotate(100deg) brightness(1.1); opacity: 0.10; }
-  22%   { filter: blur(0.3px) sepia(0.2) saturate(0.8) hue-rotate(100deg);               opacity: 0.08; }
-  100%  { filter: blur(0.3px) sepia(0.2) saturate(0) hue-rotate(100deg);                 opacity: 0.06; }
+  0%, 100% { opacity: 0.06; }
+  8%       { opacity: 0.11; }
+  22%      { opacity: 0.08; }
 }
 
 .botBird {
@@ -115,17 +120,15 @@
   display: inline-block;
   padding: 20px 40px;
   margin: -20px -40px;
-  filter: blur(0px) contrast(1.1);
-  transition: filter .6s var(--expo);
   animation: focusBreathe 8s ease-in-out 6.5s infinite;
-  will-change: filter;
+  will-change: transform, opacity;
 }
 
 
 
 @keyframes focusBreathe {
-  0%, 100% { filter: blur(0px) contrast(1.1); }
-  50% { filter: blur(10px) contrast(1.2); }
+  0%, 100% { opacity: 1; transform: scale(1) translateZ(0); }
+  50% { opacity: 0.72; transform: scale(1.012) translateZ(0); }
 }
 
 
@@ -286,10 +289,16 @@
   .badge {
     margin-bottom: 18px;
   }
+  /* subGrid on mobile: collapse all 3 cols to 1, hide blank spacer divs */
   .subGrid {
     grid-template-columns: 1fr;
     gap: 16px;
     margin-top: 28px;
+  }
+  /* Show only the content cell (middle one), hide the two blank spacer divs */
+  .subGrid > div:first-child,
+  .subGrid > div:last-child:not(.subItem) {
+    display: none;
   }
   .bottom {
     margin-top: 28px;
@@ -301,6 +310,29 @@
     width: 100%;
     text-align: center;
     padding: 14px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 0 16px 48px;
+  }
+  .title {
+    font-size: clamp(34px, 12vw, 48px);
+  }
+  .subGrid {
+    margin-top: 20px;
+    gap: 12px;
+  }
+  .subItem p {
+    font-size: 14px;
+  }
+  .badge {
+    font-size: 8px;
+    margin-bottom: 14px;
+  }
+  .bottom {
+    margin-top: 20px;
   }
 }
 

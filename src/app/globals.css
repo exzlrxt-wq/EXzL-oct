@@ -43,6 +43,9 @@
   --expo: cubic-bezier(.16, 1, .3, 1);
   --back: cubic-bezier(.34, 1.56, .64, 1);
   --hard: cubic-bezier(.76, 0, .24, 1);
+
+  /* Page horizontal padding — used by Workspace3 and other sections */
+  --page-px: clamp(18px, 5vw, 56px);
 }
 
 *, *::before, *::after {
@@ -97,7 +100,10 @@ body {
   height: 1px;
   background: var(--acid);
   z-index: 99998;
-  width: 0;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
   box-shadow: 0 0 6px var(--acid);
 }
 
@@ -251,7 +257,9 @@ section {
 .bfloat {
   display: inline-block;
   animation: bfloat 4.2s cubic-bezier(0.35, 0, 0.25, 1) infinite;
-  will-change: transform;
+}
+.bfloat-paused .bfloat {
+  animation-play-state: paused;
 }
 
 /* ══ SELECTION ══ */
@@ -286,10 +294,29 @@ section {
 /* ══ RESPONSIVE — Mobile ══ */
 @media (max-width: 600px) {
   section {
-    padding: 80px 16px;
+    padding: 72px 18px;
+  }
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .section-title {
+    font-size: clamp(32px, 9vw, 52px);
+  }
+  .section-hint {
+    text-align: left;
   }
   .mag-btn {
     padding: 14px 24px;
     font-size: 8px;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 400px) {
+  section {
+    padding: 60px 16px;
   }
 }
